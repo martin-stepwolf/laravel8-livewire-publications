@@ -55,6 +55,16 @@ Publication::all()->commentaries
     ->get();
 ```
 
+### 4. What are the advantages of migrations in a production server?
+
+There are many advantages, even since development server like:
+
+- Having a better **version control** in the database structure, if any developer create a table there are not many problem to others.
+- If there are some mistake or error we can undo the last updates.
+- We can test better the database before to update the tables in the production server.
+
+And then we just run `php artisan migrate` in the production server and we have the new updates in the database without affect the real data and avoid mistakes.
+
 ---
 
 ## Getting Started :rocket:
