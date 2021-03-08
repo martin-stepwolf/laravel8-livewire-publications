@@ -1,62 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel8 Liveware Job Interview
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+_Many challenges and questions about Laravel._
 
-## About Laravel
+### Project goal by martin-stepwolf :goal_net:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Personal project to practice Liveware and get a job as Backend Developer.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Challenges :star2:
 
-## Learning Laravel
+### 1. We need a platform with Laravel, it uses MySQL/MariaDB, a SMTP server for emails and Redis server.  What are the steps you consider necessary to leave the application running in development mode?
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- In a past way I would create the database in PHPMyAdmin with XAMPP or Heidi with Laragon, and then I update the file [.env](.env) with the credentials. For an SMTP server I would create an account in Mailtrap, copy the credentials and paste it in the sam file .env. About Redis, I have never used honestly, but it would be the same steps, create the service and paste the credentials in the file .env.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Now I use docker, in this case Laravel Sail provide some containers for MySQL, MailHog(SMTP server for testing) and Redis server.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Getting Started :rocket:
 
-### Premium Partners
+These instructions will get you a copy of the project up and running on your local machine.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+### Prerequisites :clipboard:
 
-## Contributing
+The programs you need are:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   [Docker](https://www.docker.com/get-started).
+-   [Docker compose](https://docs.docker.com/compose/install/).
 
-## Code of Conduct
+### Installing 🔧
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+First duplicate the file .env.example as .env.
 
-## Security Vulnerabilities
+```
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Note: You could change some values, anyway docker-compose create the database according to the defined values.
 
-## License
+Then install the PHP dependencies:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+ docker run --rm --interactive --tty \
+ --volume $PWD:/app \
+ composer install
+```
+
+Then create the next alias to run commands in the container with Laravel Sail.
+
+```
+alias sail='bash vendor/bin/sail'
+```
+
+Note: Setting this alias as permanent is recommended.  
+
+Create the images and run the services (laravel app, mysql, redis and mailhog):
+
+```
+sail up
+```
+
+With Laravel Sail you can run commands as docker-compose (docker-compose up -d = sail up -d) and php(e.g php artisan migrate = sail artisan migrate). To run Composer, Artisan, and Node / NPM commands just add sail at the beginning (e.g sail npm install). More information [here](https://laravel.com/docs/8.x/sail).
+
+Then generate the application key.
+
+```
+sail artisan key:generate
+```
+
+Finally generate the database with fake data:
+
+```
+sail artisan migrate --seed
+```
+
+Note: You could refresh the database any time with `migrate:refresh`.
+
+And now you have all the environment in the port 80 (http://localhost/).
+
+---
+
+## Testing
+
+### Backend testing
+
+There are some unit testing in Models and Traits and some feature testings in controllers, all these test guarantee functionalities like table relationship, validations, authentication, authorization, actions as create, read, update and delete, etc. 
+
+```
+sail artisan test
+```
+
+---
+
+### Built With 🛠️
+
+-   [Laravel 8](https://laravel.com/docs/8.x/releases/) - PHP framework.
+-   [Laravel Sail](https://laravel.com/docs/8.x/sail) - Docker development environment.
+-   [Laravel Jetstream - Liveware + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.
+
+### Authors
+
+-   Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
+
+### Contributing
+
+You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-api-quotes/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-api-quotes/pulls).
+
+### License
+
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+### References :books:
+
+- [Laravel 8 Introduction Course](https://platzi.com/clases/intro-laravel/)
+- [Test Driven Development with Laravel Course](https://platzi.com/clases/laravel-tdd/)
+- [Testing with PHP and Laravel Basic Course](https://platzi.com/clases/laravel-testing/)
