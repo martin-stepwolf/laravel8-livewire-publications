@@ -45,6 +45,16 @@ and for the Model Comment:
     }
 ```
 
+### 3. With the last Models create a query with Eloquent that gets all the publications with commentaries that contains "Hola" and be approved.
+
+```
+<!-- TODO: Check in a real environment if it works -->
+Publication::all()->commentaries
+    ->where('status', 'approved')
+    ->where('content', 'like', '%Hola%')
+    ->get();
+```
+
 ---
 
 ## Getting Started :rocket:
