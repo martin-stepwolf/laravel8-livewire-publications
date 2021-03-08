@@ -65,6 +65,14 @@ There are many advantages, even since development server like:
 
 And then we just run `php artisan migrate` in the production server and we have the new updates in the database without affect the real data and avoid mistakes.
 
+### 5 Create a project in Laravel.
+
+#### Part 1. Create the tables users, publications and comments.
+
+Ready, I added extra features like another table `comment_state` for the status in comments instead of the attribute `status`, and the table comments has the attribute `user_id`.
+
+And I created all resources like seeders, factories, relation in the Models and some Test (some tests does not work, but to not overload me I create this commit to have less files in the stage).
+
 ---
 
 ## Getting Started :rocket:
