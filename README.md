@@ -16,6 +16,35 @@ Personal project to practice Liveware and get a job as Backend Developer.
 
 - Now I use docker, in this case Laravel Sail provide some containers for MySQL, MailHog(SMTP server for testing) and Redis server.
 
+### 2. Imagine the next tables.
+
+- Publication (id, title, content, user_id)
+- Comment (id, publication_id, content, status)
+
+How would you define the relationship a publication have many comments?
+
+- Without Laravel, in the database When I create the table comments I would set the attribute publication_id in Comments as foreign key to reference the primary key id in Publication.
+- With Laravel when I create the migration for the Comments I would set this relation with:
+```
+$table->foreign('publication_id')->references('id')->on('publication');
+```
+
+- Then in the Model with **Eloquent** I set this relation as function according how Eloquent works.
+In this case for the Model Publication would be:
+```
+    public function comments() 
+    {
+        return $this->hasMany(Comment::class);
+    }
+```
+and for the Model Comment:
+```
+    public function publication()
+    {
+        return $this->belongsTo(Publication::class);
+    }
+```
+
 ---
 
 ## Getting Started :rocket:
