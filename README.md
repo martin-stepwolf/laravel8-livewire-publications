@@ -73,6 +73,10 @@ Ready, I added extra features like another table `comment_state` for the status 
 
 And I created all resources like seeders, factories, relation in the Models and some Test (some tests does not work, but to not overload me I create this commit to have less files in the stage).
 
+#### Part 2. Create a CRUD for my publications.
+
+With livewire I get the data with pagination.
+
 ---
 
 ## Getting Started :rocket:

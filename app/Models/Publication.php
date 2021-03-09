@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Publication extends Model
 {
@@ -12,6 +13,11 @@ class Publication extends Model
     protected $fillable = [
         'user_id', 'title', 'content'
     ];
+
+    public function getExcerptAttribute()
+    {
+        return Str::limit($this->content, 75);
+    }
 
     public function user()
     {
