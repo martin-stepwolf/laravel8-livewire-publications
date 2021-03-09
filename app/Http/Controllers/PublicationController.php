@@ -35,7 +35,6 @@ class PublicationController extends Controller
      */
     public function store(PublicationRequest $request)
     {
-
     }
 
     /**
@@ -44,8 +43,11 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function show(Publication $publication)
+    public function show(Request $request, Publication $publication)
     {
+        if ($request->user()->id !== $publication->user_id)
+            // TODO: show a flash message about this is a unauthorized action
+            return view('publication/index');
         return view('publication/show', compact('publication'));
     }
 

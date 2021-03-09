@@ -7,6 +7,6 @@
     <div>
         <label>Content</label>
         <textarea wire:model="content"></textarea>
-        @error('body') <span>{{ $message }}</span> @enderror
+        @error('content') <span>{{ $message }}</span> @enderror
     </div>
 </div>

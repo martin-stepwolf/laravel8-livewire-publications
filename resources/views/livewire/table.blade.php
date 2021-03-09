@@ -9,6 +9,9 @@
                     Title / Abstract
                 </td>
                 <td class="border px-4 py-2">
+                    Comments
+                </td>
+                <td class="border px-4 py-2">
                     Updated at
                 </td>
                 <td class="border px-4 py-2" colspan="2">
@@ -21,8 +24,13 @@
             <tr>
                 <td>{{ $publication->id }}</td>
                 <td>
-                    <b>{{ $publication->title }}</b> <br />
+                    <b>{{ $publication->title }}</b> <br>
                     {{ $publication->excerpt }}
+                </td>
+                <td>
+                    Waiting: {{ $publication->comments->where('comment_state_id', 1)->count()}} <br>
+                    Approved: {{ $publication->comments->where('comment_state_id', 1)->count()}} <br>
+                    Rejected: {{ $publication->comments->where('comment_state_id', 1)->count()}}
                 </td>
                 <td>{{ $publication->updated_at->diffForHumans() }}</td>
                 <td class="px-4 py-2">
