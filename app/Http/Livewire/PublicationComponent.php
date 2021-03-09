@@ -16,4 +16,9 @@ class PublicationComponent extends Component
             'publications' => Publication::orderBy('id', 'desc')->paginate()
         ]);
     }
+
+    public function destroy($id)
+    {
+        Publication::destroy($id);
+    }
 }

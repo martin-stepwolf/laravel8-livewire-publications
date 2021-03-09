@@ -26,7 +26,10 @@
                 </td>
                 <td>{{ $publication->updated_at->diffForHumans() }}</td>
                 <td class="px-4 py-2">
-                    <a href="route('publications.show', publication.id)">
+                <button wire:click="destroy({{ $publication->id }})">
+                    Delete
+                </button>
+                    <a href="{{ route('publication.show', $publication->id) }}">
                         Look
                     </a>
                 </td>

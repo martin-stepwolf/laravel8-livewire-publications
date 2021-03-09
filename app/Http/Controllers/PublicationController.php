@@ -15,7 +15,7 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
-        return view('publication');
+        return view('publication/index');
     }
 
     /**
@@ -35,6 +35,7 @@ class PublicationController extends Controller
      */
     public function store(PublicationRequest $request)
     {
+
     }
 
     /**
@@ -45,6 +46,7 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
+        return view('publication/show', compact('publication'));
     }
 
     /**

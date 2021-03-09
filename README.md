@@ -75,7 +75,7 @@ And I created all resources like seeders, factories, relation in the Models and 
 
 #### Part 2. Create a CRUD for my publications.
 
-With livewire I get the data with pagination.
+With livewire I get the data with pagination, delete and look a publication.
 
 ---
 
