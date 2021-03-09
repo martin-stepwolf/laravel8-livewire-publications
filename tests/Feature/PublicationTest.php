@@ -56,6 +56,28 @@ class PublicationTest extends TestCase
         // $this->assertDatabaseHas($this->table, ['title' => 'title']);
     }
 
+    public function test_update()
+    {
+        $user = User::factory()->create();
+        $publication = Publication::factory()->create([
+            'user_id' => $user->id,
+            'title' => 'old title',
+            'content' => 'old content'
+        ]);
+
+        // TODO: check well how I could update in livewire
+        // $response = $this->actingAs($user)->put("$this->url/{$publication->id}", [
+        //     'title' => 'new title',
+        //     'content' => 'new content'
+        // ]);
+
+        // $response->assertStatus(302);
+        // $this->assertDatabaseHas($this->table, [
+        //     'title' => 'new title',
+        //     'content' => 'new content'
+        // ]);
+    }
+
     public function test_destroy()
     {
         $user = User::factory()->create();

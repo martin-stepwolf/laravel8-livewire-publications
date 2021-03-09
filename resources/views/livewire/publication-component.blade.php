@@ -1,6 +1,6 @@
 <div>
     <div>
-        @include('livewire.create')
+        @include('livewire.' . $view)
     </div>
     <div>
         @include('livewire.table')

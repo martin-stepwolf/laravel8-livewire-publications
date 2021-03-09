@@ -26,15 +26,15 @@
                 </td>
                 <td>{{ $publication->updated_at->diffForHumans() }}</td>
                 <td class="px-4 py-2">
-                <button wire:click="destroy({{ $publication->id }})">
-                    Delete
-                </button>
+                    <button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
+                        Delete
+                    </button>
                     <a href="{{ route('publication.show', $publication->id) }}">
                         Look
                     </a>
                 </td>
                 <td class="px-4 py-2">
-                    <a href="route('publications.edit', publication.id)">
+                    <a wire:click="edit({{ $publication->id }})">
                         Edit
                     </a>
                 </td>
