@@ -42,6 +42,20 @@ class PublicationTest extends TestCase
         $response->assertSee($publication->excerpt);
     }
 
+    public function test_store()
+    {
+        $user = User::factory()->create();
+
+        // TODO: check well how I could store in livewire
+        // $response = $this->actingAs($user)->post($this->url, [
+        //     'title' => 'title',
+        //     'content' => 'content'
+        // ]);
+
+        // $response->assertStatus(302);
+        // $this->assertDatabaseHas($this->table, ['title' => 'title']);
+    }
+
     public function test_destroy()
     {
         $user = User::factory()->create();

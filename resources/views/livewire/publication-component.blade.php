@@ -1,3 +1,8 @@
 <div>
-    @include('livewire.table')
+    <div>
+        @include('livewire.create')
+    </div>
+    <div>
+        @include('livewire.table')
+    </div>
 </div>
