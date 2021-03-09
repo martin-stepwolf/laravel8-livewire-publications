@@ -14,11 +14,25 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
+        return view('publication/index', [
+            'publications' => Publication::orderBy('id', 'desc')->paginate()
+        ]);
+    }
+
+    public function show(Publication $publication)
+    {
+        return view('publication/show', compact('publication') + [
+            'comments' => $publication->comments->where('comment_state_id', 1)
+        ]);
+    }
+
+    public function user_index(Request $request)
+    {
         // TODO: Implement a validation for urls from no owners
         // if ($request->user()->id !== $request->user)
         //     // TODO: show a flash message about this is a unauthorized action
         //     return back();
-        return view('publication/index');
+        return view('publication/user-index');
     }
 
     /**
@@ -27,12 +41,12 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function user_show(Request $request)
     {
         $publication = Publication::findOrFail($request->id);
         if ($request->user()->id !== $publication->user_id)
             // TODO: show a flash message about this is a unauthorized action
             return back();
-        return view('publication/show', compact('publication'));
+        return view('publication/user-show', compact('publication'));
     }
 }

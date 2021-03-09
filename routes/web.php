@@ -23,17 +23,31 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get(
-        'users/{user}/publications',
+        'publications',
         [
             App\Http\Controllers\PublicationController::class,
             'index'
+        ]
+    )->name('publication.index');
+    Route::get(
+        'publications/{publication}',
+        [
+            App\Http\Controllers\PublicationController::class,
+            'show'
+        ]
+    )->name('publication.show');
+    Route::get(
+        'users/{user}/publications',
+        [
+            App\Http\Controllers\PublicationController::class,
+            'user_index'
         ]
     )->name('user.publication.index');
     Route::get(
         'users/{user}/publications/{id}',
         [
             App\Http\Controllers\PublicationController::class,
-            'show'
+            'user_show'
         ]
     )->name('user.publication.show');
 });

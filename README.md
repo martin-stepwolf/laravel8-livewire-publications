@@ -77,6 +77,10 @@ And I created all resources like seeders, factories, relation in the Models and 
 
 With livewire I get the data with pagination, create, delete, update and look a publication. There are some validations about storing and updating data, and a basic policy to not allow delete and update publications by not owners.
 
+#### Part 3. Create some views to look all the publications with comments.
+
+This are static views, so I did not use livewire. All the users can look all the publications and each publication show just the approved comments.
+
 ---
 
 ## Getting Started :rocket:
