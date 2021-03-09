@@ -37,7 +37,7 @@
                     <button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
                         Delete
                     </button>
-                    <a href="{{ route('publication.show', $publication->id) }}">
+                    <a href="{{ route('user.publication.show', ['user' => Auth::user()->id, 'id' => $publication->id]) }}">
                         Look
                     </a>
                 </td>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Publication;
 use Illuminate\Http\Request;
-use App\Http\Requests\PublicationRequest;
 
 class PublicationController extends Controller
 {
@@ -15,26 +14,11 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
+        // TODO: Implement a validation for urls from no owners
+        // if ($request->user()->id !== $request->user)
+        //     // TODO: show a flash message about this is a unauthorized action
+        //     return back();
         return view('publication/index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(PublicationRequest $request)
-    {
     }
 
     /**
@@ -43,42 +27,12 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Publication $publication)
+    public function show(Request $request)
     {
+        $publication = Publication::findOrFail($request->id);
         if ($request->user()->id !== $publication->user_id)
             // TODO: show a flash message about this is a unauthorized action
-            return view('publication/index');
+            return back();
         return view('publication/show', compact('publication'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Publication $publication)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PublicationRequest $request, Publication $publication)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Publication $publication)
-    {
     }
 }

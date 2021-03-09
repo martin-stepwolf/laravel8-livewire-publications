@@ -4,7 +4,7 @@
             {{ __('My Publication') . ' ' . $publication->id }}
         </h2>
         <div>
-            <a href="{{ route('publication.index') }}">
+            <a href="{{ route('user.publication.index', ['user' => Auth::user()->id]) }}">
                 {{ __('Back') }}
             </a>
         </div>
