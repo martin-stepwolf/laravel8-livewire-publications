@@ -15,7 +15,7 @@
                     <div>
                         {{$publication->publication_state_id}}
                         Author: <b>{{ $publication->user->name}}</b> |
-                        Comments: {{ $publication->comments->where('comment_state_id', 1)->count()}} |
+                        Comments: {{ $publication->comments->where('comment_state_id', 2)->count()}} |
                         <a href="{{ route('publication.show', $publication->id) }}">See more</a>
                     </div>
                 </div>

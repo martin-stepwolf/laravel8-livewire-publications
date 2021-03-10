@@ -25,6 +25,6 @@ class Comment extends Model
 
     public function comment_state()
     {
-        return $this->belongsTo(Comment_state::class);
+        return $this->belongsTo(CommentState::class);
     }
 }

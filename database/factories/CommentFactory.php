@@ -23,7 +23,7 @@ class CommentFactory extends Factory
     {
         return [
             'user_id' => rand(1, 10),
-            'publication_id' => rand(1, 10),
+            'publication_id' => rand(1, 100),
             'comment_state_id' => rand(1, 3),
             'content' => $this->faker->text(300)
         ];

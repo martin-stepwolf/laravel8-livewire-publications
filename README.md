@@ -81,6 +81,10 @@ With livewire I get the data with pagination, create, delete, update and look a 
 
 This are static views, so I did not use livewire. All the users can look all the publications and each publication show just the approved comments.
 
+#### Part 4. All the user can comment just one time any publication.
+
+The resource to create the commentary and the validations were created. I also improve the seeders and factories with more data and a defined user with a publication with some commentaries.
+
 ---
 
 ## Getting Started :rocket:

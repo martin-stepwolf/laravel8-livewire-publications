@@ -36,6 +36,13 @@ Route::middleware('auth:sanctum')->group(function () {
             'show'
         ]
     )->name('publication.show');
+    Route::post(
+        'publications/{publication}/comments/store',
+        [
+            App\Http\Controllers\CommentController::class,
+            'store'
+        ]
+    )->name('publication.comment.store');
     Route::get(
         'users/{user}/publications',
         [

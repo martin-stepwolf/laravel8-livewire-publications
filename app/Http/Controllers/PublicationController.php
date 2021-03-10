@@ -21,8 +21,12 @@ class PublicationController extends Controller
 
     public function show(Publication $publication)
     {
-        return view('publication/show', compact('publication') + [
-            'comments' => $publication->comments->where('comment_state_id', 1)
+        $has_commented = false;
+        if ($publication->comments->where('user_id', auth()->user()->id)->count() !== 0)
+            $has_commented = true;
+
+        return view('publication/show', compact('publication') +  compact('has_commented') + [
+            'comments' => $publication->comments->where('comment_state_id', 2),
         ]);
     }
 
