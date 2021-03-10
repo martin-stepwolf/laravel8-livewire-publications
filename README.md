@@ -1,18 +1,18 @@
-# Laravel8 Liveware Publications ![Status](https://img.shields.io/badge/status-in_process-yellow) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
+# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_process-yellow) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
 
-_App to make publications and comments._
+_System to make publications and comments._
 
 ### Project goal by martin-stepwolf :goal_net:
 
-This was a part of a interview where I completed some challenges and questions, you can read about it in this [file](challenges.md).
+This was a part of a interview where I completed some [challenges and questions](challenges.md).
 
-In this interview they ask me to make a Laravel project with similar features that I have made in other personal projects, so I decided to challenge me by creating a project with Jetstream + Liveware - Blade, a way similar to Vue - Inertia, and Implement Tailwindcss instead of Bootstrap.
+In the interview I had to make a Laravel project with similar features I have made in other personal projects, so I decided to challenge me by creating a project with **Jetstream + Livewire - Blade**. (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap).
 
 ### Achievements :star2:
 
 - Completed all the challenges.
 - Implemented a CRUD with Livewire.
-- Implemented an Event, Listener and Notification to sent an email.
+- Implemented an Event, Listener and Notification to sent an email as Queue.
 
 ---
 ## Getting Started :rocket:
@@ -23,8 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 The programs you need are:
 
--   [Docker](https://www.docker.com/get-started).
--   [Docker compose](https://docs.docker.com/compose/install/).
+-   [Docker](https://www.docker.com/get-started) and [Docker compose](https://docs.docker.com/compose/install/).
 
 ### Installing 🔧
 
@@ -76,13 +75,15 @@ Note: You could refresh the database any time with `migrate:refresh`.
 
 And now you have all the environment in the port 80 (http://localhost/).
 
+Note: JavaScript and CSS files are loaded in public/css and public/js, you do not need to generate it with `sail npm install` and `sail npm run watch` because there are not files that generate JavaScript and CSS like SASS or Vue files. 
+
 ---
 
 ## Testing
 
 ### Backend testing
 
-There are some unit testing in Models and Traits and some feature testings in controllers, all these test guarantee functionalities like table relationship, validations, authentication, authorization, actions as create, read, update and delete, etc. 
+There are some test for Models and Controller, Jetstream also has its tests about its features, this project **was not worked with Test-Driven-Testing due to Livewire**, this is a different way to work. All this test you can run it with:
 
 ```
 sail artisan test
@@ -109,7 +110,7 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 -   [Laravel 8](https://laravel.com/docs/8.x/releases/) - PHP framework.
 -   [Laravel Sail](https://laravel.com/docs/8.x/sail) - Docker development environment.
--   [Laravel Jetstream - Liveware + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.
+-   [Laravel Jetstream - Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.
 
 ### Authors
 
@@ -117,7 +118,7 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 ### Contributing
 
-You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-api-quotes/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-api-quotes/pulls).
+You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-livewire-publications/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-livewire-publications/pulls).
 
 ### License
 

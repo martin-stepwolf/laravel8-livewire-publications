@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "martin-stepwolf/laravel8-livewire-publications",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "System to make publications and comments.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "livewire",
+        "laravel-jetstream"
     ],
     "license": "MIT",
     "require": {
