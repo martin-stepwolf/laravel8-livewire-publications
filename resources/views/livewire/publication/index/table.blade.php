@@ -1,6 +1,6 @@
 <div>
-    <table>
-        <thead>
+    <table class="table table-auto border-2 bg-gray-100">
+        <thead class="font-bold">
             <tr>
                 <td class="border px-4 py-2">
                     Id
@@ -9,12 +9,9 @@
                     Title / Abstract
                 </td>
                 <td class="border px-4 py-2">
-                    Comments
-                </td>
-                <td class="border px-4 py-2">
                     Updated at
                 </td>
-                <td class="border px-4 py-2" colspan="2">
+                <td class="border px-4 py-2">
                     Actions
                 </td>
             </tr>
@@ -22,29 +19,25 @@
         <tbody>
             @foreach($publications as $publication)
             <tr>
-                <td>{{ $publication->id }}</td>
-                <td>
+                <td class="border px-4 py-2">{{ $publication->id }}</td>
+                <td class="border px-4 py-2">
                     <b>{{ $publication->title }}</b> <br>
                     {{ $publication->excerpt }}
+                    @if($publication->comments->where('comment_state_id', 1)->count() !=0 )
+                    <br> New comments: {{$publication->comments->where('comment_state_id', 1)->count()}}
+                    @endif
                 </td>
-                <td>
-                    Waiting: {{ $publication->comments->where('comment_state_id', 1)->count()}} <br>
-                    Approved: {{ $publication->comments->where('comment_state_id', 1)->count()}} <br>
-                    Rejected: {{ $publication->comments->where('comment_state_id', 1)->count()}}
-                </td>
-                <td>{{ $publication->updated_at->diffForHumans() }}</td>
-                <td class="px-4 py-2">
-                    <button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
-                        Delete
-                    </button>
-                    <a href="{{ route('user.publication.show', ['user' => Auth::user()->id, 'id' => $publication->id]) }}">
-                        Look
+                <td class="border px-4 py-2">{{ $publication->updated_at->diffForHumans() }}</td>
+                <td class=" border px-4 py-2">
+                    <a href="{{ route('user.publication.show', ['user' => Auth::user()->id, 'id' => $publication->id]) }}" class="text-gray-700 underline">
+                        See more
                     </a>
-                </td>
-                <td class="px-4 py-2">
-                    <a wire:click="edit({{ $publication->id }})">
+                    <x-jet-button class="mb-1" wire:click="edit({{ $publication->id }})">
                         Edit
-                    </a>
+                    </x-jet-button>
+                    <x-jet-danger-button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
+                        Delete
+                    </x-jet-danger-button>
                 </td>
             </tr>
             @endforeach
