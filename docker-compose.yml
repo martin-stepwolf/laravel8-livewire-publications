@@ -46,6 +46,12 @@ services:
             - sail
         healthcheck:
           test: ["CMD", "redis-cli", "ping"]
+    memcached:
+        image: 'memcached:alpine'
+        ports:
+            - '11211:11211'
+        networks:
+            - sail
     mailhog:
         image: 'mailhog/mailhog:latest'
         ports:

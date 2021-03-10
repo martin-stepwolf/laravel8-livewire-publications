@@ -85,6 +85,12 @@ This are static views, so I did not use livewire. All the users can look all the
 
 The resource to create the commentary and the validations were created. I also improve the seeders and factories with more data and a defined user with a publication with some commentaries.
 
+#### Part 5. When a user comment a publication, an email is sent to the owner.
+
+I use an Event and Listener to catch the action, then with a Notification I sent the email, and I can look it from MailHog.
+
+To not to overload the server, these processes are executed in the background to give a fast response to the user. We can listen this processes with `sail artisan queue:listen`.
+
 ---
 
 ## Getting Started :rocket:
