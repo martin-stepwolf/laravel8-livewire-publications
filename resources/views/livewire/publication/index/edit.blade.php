@@ -1,10 +1,14 @@
 <div>
-    <h2>Edit publication {{ $publication_id }}</h2>
+    <div class="mb-4 text-gray-600">
+        Edit publication {{ $publication_id }}
+    </div>
     @include('livewire.publication.index.form')
-    <button wire:click="update">
-        Update
-    </button>
-    <button wire:click="default">
-        Cancel
-    </button>
+    <div class="flex items-center justify-end mt-4">
+        <x-jet-button class="ml-4" wire:click="update">
+            Update
+        </x-jet-button>
+        <x-jet-danger-button class="ml-4" wire:click="default">
+            Cancel
+        </x-jet-danger-button>
+    </div>
 </div>

@@ -28,17 +28,26 @@
                     </div>
                     <hr>
                     @if(!$has_commented)
-                    <div class="gir ">
-                        <h3 class="font-bold">Add a comentary</h3>
-                        <p>Note: All the commentary should be approved by the author.</p>
+                    <div>
+                        <div class="mb-4 text-gray-600">
+                            Add comment <br>
+                            <span class="tx-sm">
+                                Note: All the commentary should be approved by the author.
+                            </span>
+                        </div>
                         <form action="{{route('publication.comment.store', $publication->id)}}" method="POST">
                             @csrf
-                            <div>
-                                <label>Content*</label>
-                                <textarea name="content" rows="1" required></textarea>
+
+
+                            <div class="mt-4">
+                                <x-jet-label for="content" value="{{ __('Content') }}" />
+                                <textarea id="content" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" type="text" name="content" required></textarea>
                             </div>
-                            <div>
-                                <input type="submit" value="Send">
+                            <x-jet-validation-errors class="mb-4" />
+                            <div class="flex items-center justify-end mt-4">
+                                <x-jet-button class="ml-4">
+                                    Send
+                                </x-jet-button>
                             </div>
                         </form>
                     </div>
