@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($publications as $publication)
+            @forelse($publications as $publication)
             <tr>
                 <td class="border px-4 py-2">{{ $publication->id }}</td>
                 <td class="border px-4 py-2 text-justify">
@@ -40,12 +40,11 @@
                     </x-jet-danger-button>
                 </td>
             </tr>
-            @endforeach
-            @if($publications === [])
+            @empty
             <tr>
-                <td class="border px-4 py-2" colspan="5">There are not publications</td>
+                <td class="border px-4 py-2" colspan="4">There are not publications</td>
             </tr>
-            @endif
+            @endforelse
         </tbody>
     </table>
     <!-- BUG: If the user search the page is the same -->

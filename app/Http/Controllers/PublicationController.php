@@ -9,11 +9,6 @@ class PublicationController extends Controller
 {
     private $q;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $this->q = $request->q;
@@ -48,16 +43,10 @@ class PublicationController extends Controller
         return view('publication/user-index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
     public function user_show(Request $request)
     {
         $publication = Publication::findOrFail($request->id);
-        if ($request->user()->id !== $publication->user_id)
+        if ($request->user()->id != $publication->user_id)
             return redirect()
                 ->route('user.publication.index', ['user' => auth()->user()->id])
                 ->with('warning', 'You are allowed to manage only your publication.');

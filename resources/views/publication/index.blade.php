@@ -16,7 +16,7 @@
                 </form>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid grid-cols-1 lg:grid-cols-2">
-                @foreach($publications as $publication)
+                @forelse($publications as $publication)
                 <!-- Create a template for his kind of containers -->
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <h3 class="font-bold">{{ $publication->id }}.- {{ $publication->title }} </h3>
@@ -30,10 +30,9 @@
                         See more
                     </a>
                 </div>
-                @endforeach
-                @if($publications === [])
+                @empty
                 <div class="border px-4 py-2">There are not publications</div>
-                @endif
+                @endforelse
             </div>
             <!-- BUG: Add the pagination in the links -->
             {{ $publications->links() }}
