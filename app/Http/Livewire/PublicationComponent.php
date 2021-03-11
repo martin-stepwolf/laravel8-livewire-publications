@@ -23,7 +23,7 @@ class PublicationComponent extends Component
     public function render()
     {
         return view('livewire.publication.index.index-component', [
-            'publications' => auth()->user()->publications()->orderBy('id', 'desc')->paginate()
+            'publications' => auth()->user()->publications()->orderBy('id', 'desc')->paginate(4)
         ]);
     }
 

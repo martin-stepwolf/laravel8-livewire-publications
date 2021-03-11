@@ -22,7 +22,7 @@ class PublicationFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1,10),
+            'user_id' => rand(2, 30),
             'title' => $this->faker->text(50),
             'content' => $this->faker->text(1200)
         ];

@@ -6,19 +6,14 @@ use App\Models\Comment;
 use App\Models\Publication;
 use Illuminate\Database\Seeder;
 
-class UserTestSeeder extends Seeder
+class CommentTestSeeder extends Seeder
 {
     public function run()
     {
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Martín Campos',
-            'email' => 'test@example.com'
-        ]);
-
         // A publication is created with some comments 
         for ($i = 1; $i <= 1; $i++) {
             $publication = Publication::factory()->create([
-                'user_id' => $user->id
+                'user_id' => 1
             ]);
             // One comment is waiting
             for ($i = 1; $i <= 1; $i++)

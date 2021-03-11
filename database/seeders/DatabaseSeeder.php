@@ -13,12 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Publication::factory(100)->create();
         $this->call(CommentStateSeeder::class);
-        \App\Models\Comment::factory(1000)->create();
 
-        // data to test the app from a user 
-        $this->call(UserTestSeeder::class);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com'
+        ]);
+        \App\Models\User::factory(29)->create();
+
+        // data to test a particular comment 
+        $this->call(CommentTestSeeder::class);
+        \App\Models\Publication::factory(20)->create(['user_id' => 1]);
+
+        \App\Models\Publication::factory(29)->create();
+
+        \App\Models\Comment::factory(1000)->create();
     }
 }

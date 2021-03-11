@@ -31,10 +31,10 @@
                 <td class=" border px-4 py-2">
                     <a href="{{ route('user.publication.show', ['user' => Auth::user()->id, 'id' => $publication->id]) }}" class="text-gray-700 underline">
                         See more
-                    </a>
+                    </a> <br>
                     <x-jet-button class="mb-1" wire:click="edit({{ $publication->id }})">
                         Edit
-                    </x-jet-button>
+                    </x-jet-button> <br>
                     <x-jet-danger-button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
                         Delete
                     </x-jet-danger-button>
