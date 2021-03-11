@@ -9,6 +9,10 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            'content' => 'required|min:15|max:255',
+        ]);
+
         $comment = auth()->user()->comments()->create($request->all() + [
             'publication_id' => $request->publication,
             'comment_state_id' => 1

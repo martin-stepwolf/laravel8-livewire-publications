@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end">
                 <form class="flex my-2 md:w-2/3 lg:w-1/2">
-                    <x-jet-input name="q" class="block mt-1 w-full" type="text" value="{{ $q }}" />
+                    <x-jet-input name="q" class="block mt-1 w-full" type="text" value="{{ $q }}" placeholder="Search by title or content"/>
                     <x-jet-button class="ml-4">
                         Search
                     </x-jet-button>
