@@ -9,9 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid grid-cols-1 lg:grid-cols-2">
                 @foreach($publications as $publication)
+                <!-- Create a template for his kind of containers -->
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <h3 class="font-bold">{{ $publication->id }}.- {{ $publication->title }} </h3>
-                    <p class="py-1">{{ $publication->excerpt }}</p>
+                    <p class="py-1 text-justify">{{ $publication->excerpt }}</p>
                     <span class="text-sm font-semibold text-indigo-700">
                         {{$publication->publication_state_id}}
                         Author: <b>{{ $publication->user->name}}</b> |

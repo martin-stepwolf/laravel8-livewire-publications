@@ -14,9 +14,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                    <!-- TODO: Create just one template for show and user-show -->
                     <div class="pb-4">
                         <h3 class="font-bold text-lg">{{ $publication->title }} </h3>
-                        <p class="py-1">{{ $publication->content }}</p>
+                        <p class="py-1 text-justify">{{ $publication->content }}</p>
                         <div class="text-sm font-semibold text-indigo-700">
                             Author: <b>{{ $publication->user->name}}</b> |
                             Created: <b>{{ $publication->created_at->diffForHumans()}}</b> | Updated: <b>{{ $publication->created_at->diffForHumans()}}</b> <br>
@@ -27,8 +28,9 @@
                         <h3 class="font-bold text-lg">Comments {{ $publication->comments->where('comment_state_id', 2)->count()}}</h3>
                         <div class="grid grid-cols-1 lg:grid-cols-2 divide-y">
                             @foreach($comments as $comment)
+                            <!-- Set a pagination with Livewire -->
                             <div class="px-4 py-2">
-                                <p class=py-1>{{$comment->content}}</p>
+                                <p class="py-1 text-justify">{{$comment->content}}</p>
                                 <div class="text-sm font-semibold text-indigo-700">
                                     <b>{{$comment->user->name}}</b> - {{$comment->created_at->diffForHumans()}}
                                 </div>

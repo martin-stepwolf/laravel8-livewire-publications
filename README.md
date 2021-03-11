@@ -13,6 +13,7 @@ In the interview I had to make a Laravel project with similar features I have ma
 - Completed all the challenges.
 - Implemented a CRUD with Livewire.
 - Implemented an Event, Listener and Notification to sent an email as Queue.
+- Implemented design with Tailwindcss according to Jetstream components and styles.
 
 ---
 ## Getting Started :rocket:

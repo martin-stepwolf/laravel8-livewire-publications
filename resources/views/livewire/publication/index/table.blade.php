@@ -20,7 +20,7 @@
             @foreach($publications as $publication)
             <tr>
                 <td class="border px-4 py-2">{{ $publication->id }}</td>
-                <td class="border px-4 py-2">
+                <td class="border px-4 py-2 text-justify">
                     <b>{{ $publication->title }}</b> <br>
                     {{ $publication->excerpt }}
                     @if($publication->comments->where('comment_state_id', 1)->count() !=0 )

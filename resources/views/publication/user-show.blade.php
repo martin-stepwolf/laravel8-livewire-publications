@@ -16,7 +16,7 @@
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="pb-4">
                         <h3 class="font-bold text-lg">{{ $publication->title }}</h3>
-                        <p class="py-1">{{ $publication->content }}</p>
+                        <p class="py-1 text-justify">{{ $publication->content }}</p>
                         <div class="text-sm font-semibold text-indigo-700">
                             Created {{ $publication->created_at->diffForHumans()}} |
                             Updated {{ $publication->created_at->diffForHumans()}}
@@ -42,10 +42,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Show just the comments on hold and set the possibility to approve or reject -->
                             @foreach($publication->comments as $comment)
                             <tr>
                                 <td class="border px-4 py-2">{{ $comment->user->name }}</td>
-                                <td class="border px-4 py-2"> {{$comment->content}}</td>
+                                <td class="border px-4 py-2 text-justify"> {{$comment->content}}</td>
                                 <td class="border px-4 py-2"> {{ $comment->comment_state->title}}</td>
                                 <td class="border px-4 py-2">{{ $comment->updated_at->diffForHumans() }}</td>
                             </tr>
