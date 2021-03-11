@@ -24,19 +24,12 @@
                         </div>
                     </div>
                     <hr>
-                    <div>
-                        <h3 class="font-bold text-lg">Comments {{ $publication->comments->where('comment_state_id', 2)->count()}}</h3>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 divide-y">
-                            @foreach($comments as $comment)
-                            <!-- Set a pagination with Livewire -->
-                            <div class="px-4 py-2">
-                                <p class="py-1 text-justify">{{$comment->content}}</p>
-                                <div class="text-sm font-semibold text-indigo-700">
-                                    <b>{{$comment->user->name}}</b> - {{$comment->created_at->diffForHumans()}}
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+                    <div class="bg-gray-100 mt-4 mb-2">
+                        @livewire('publication-comments', [
+                        'title' => 'Comments',
+                        'publication_id' => $publication->id,
+                        'comment_state_id' => 2
+                        ])
                     </div>
                     @if(!$has_commented)
                     <div>
@@ -45,16 +38,16 @@
                             @csrf
                             <div>
                                 <x-jet-label for="content" value="{{ __('Content') }}" />
-                                <textarea id="content" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" type="text" name="content" required></textarea>
+                                <x-textarea id="content" name="content" required/>
                             </div>
                             <x-jet-validation-errors class="mb-4" />
                             <div class="flex items-center justify-end mt-4">
                                 <span class="text-sm">
                                     Note: The comment should be approved by the author.
                                 </span>
-                                <x-jet-button class="ml-4">
+                                <x-primary-button class="ml-4">
                                     Send
-                                </x-jet-button>
+                                </x-primary-button>
                             </div>
                         </form>
                     </div>

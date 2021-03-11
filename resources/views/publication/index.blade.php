@@ -5,8 +5,16 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-end">
+                <form class="flex my-2 md:w-2/3 lg:w-1/2">
+                    <x-jet-input name="q" class="block mt-1 w-full" type="text" value="{{ $q }}" />
+                    <x-jet-button class="ml-4">
+                        Search
+                    </x-jet-button>
+                </form>
+            </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid grid-cols-1 lg:grid-cols-2">
                 @foreach($publications as $publication)
                 <!-- Create a template for his kind of containers -->
@@ -27,6 +35,7 @@
                 <div class="border px-4 py-2">There are not publications</div>
                 @endif
             </div>
+            <!-- BUG: Add the pagination in the links -->
             {{ $publications->links() }}
         </div>
     </div>

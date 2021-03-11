@@ -18,6 +18,6 @@ class CommentController extends Controller
         if (auth()->user()->id != $comment->publication->user_id)
             event(new NewComment(auth()->user(), $comment));
 
-        return back();
+        return back()->with('message', 'Your comment was created successfully, wait for a approbation by the owner.');
     }
 }

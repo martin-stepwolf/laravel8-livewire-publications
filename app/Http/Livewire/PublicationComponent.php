@@ -11,7 +11,7 @@ class PublicationComponent extends Component
 {
     use WithPagination, AuthorizesRequests;
 
-    public $publication_id, $title, $content;
+    public $publication_id, $title, $content, $q;
 
     protected $rules = [
         'title' => 'required|min:8',
@@ -23,7 +23,11 @@ class PublicationComponent extends Component
     public function render()
     {
         return view('livewire.publication.index.index-component', [
-            'publications' => auth()->user()->publications()->orderBy('id', 'desc')->paginate(4)
+            'publications' => auth()->user()
+                ->publications()->where('title', 'LIKE', "%$this->q%")
+                // TODO: search also by content
+                // ->orWhere('content', 'LIKE', "%$this->q%")
+                ->orderBy('id', 'desc')->paginate(4)
         ]);
     }
 
@@ -35,6 +39,7 @@ class PublicationComponent extends Component
             'content' => $this->content
         ]);
 
+        session()->flash('confirmation', "Publication $publication->id successfully created.");
         $this->edit($publication->id);
     }
 
@@ -65,6 +70,7 @@ class PublicationComponent extends Component
             'content' => $this->content
         ]);
 
+        session()->flash('confirmation', "Publication $publication->id successfully updated.");
         $this->default();
     }
 
@@ -76,6 +82,7 @@ class PublicationComponent extends Component
             $this->authorize('edit', $publication);
 
         $publication->delete();
+        session()->flash('confirmation', "Publication $publication->id successfully deleted.");
     }
 
     public function default()

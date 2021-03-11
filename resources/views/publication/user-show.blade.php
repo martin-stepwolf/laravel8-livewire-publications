@@ -23,36 +23,27 @@
                         </div>
                     </div>
                     <hr>
-                    <h3 class="font-bold text-lg">Comments</h3>
-                    <table class="table table-auto border-2 bg-gray-100">
-                        <thead class="font-bold">
-                            <tr>
-                                <td class="border px-4 py-2">
-                                    User
-                                </td>
-                                <td class="border px-4 py-2">
-                                    Comment
-                                </td>
-                                <td class="border px-4 py-2">
-                                    State
-                                </td>
-                                <td class="border px-4 py-2">
-                                    Created at
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Show just the comments on hold and set the possibility to approve or reject -->
-                            @foreach($publication->comments as $comment)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $comment->user->name }}</td>
-                                <td class="border px-4 py-2 text-justify"> {{$comment->content}}</td>
-                                <td class="border px-4 py-2"> {{ $comment->comment_state->title}}</td>
-                                <td class="border px-4 py-2">{{ $comment->updated_at->diffForHumans() }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="bg-gray-100 mt-4 mb-2">
+                        @livewire('publication-comments', [
+                        'title' => 'Comments approved',
+                        'publication_id' => $publication->id,
+                        'comment_state_id' => 2
+                        ])
+                    </div>
+                    <div class="bg-blue-100 my-2">
+                        @livewire('publication-comments', [
+                        'title' => 'Comments on hold',
+                        'publication_id' => $publication->id,
+                        'comment_state_id' => 2
+                        ])
+                    </div>
+                    <div class="bg-red-100">
+                        @livewire('publication-comments', [
+                        'title' => 'Comments rejected',
+                        'publication_id' => $publication->id,
+                        'comment_state_id' => 3
+                        ])
+                    </div>
                 </div>
             </div>
         </div>

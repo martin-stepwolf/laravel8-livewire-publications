@@ -48,5 +48,6 @@
             @endif
         </tbody>
     </table>
+    <!-- BUG: If the user search the page is the same -->
     {{ $publications->links() }}
 </div>
