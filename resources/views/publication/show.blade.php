@@ -38,7 +38,7 @@
                             @csrf
                             <div>
                                 <x-jet-label for="content" value="{{ __('Content') }}" />
-                                <x-textarea id="content" name="content" required/>
+                                <x-textarea id="content" name="content" required />
                             </div>
                             <x-jet-validation-errors class="mb-4" />
                             <div class="flex items-center justify-end mt-4">
@@ -52,6 +52,7 @@
                         </form>
                     </div>
                     @endif
+                    <!-- TODO: show a state about his comment saved, if it is on hold, approved or rejected -->
                 </div>
                 <hr>
             </div>

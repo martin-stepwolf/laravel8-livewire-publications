@@ -16,6 +16,7 @@ class PublicationComments extends Component
 
     public function render()
     {
+        // BUG: Update the data when a comment is approved or rejected from comments-component
         return view('livewire.publication-comments', [
             'title' => $this->title,
             'comments' => Comment::where([

@@ -1,4 +1,9 @@
 <div>
+    @if (session()->has('confirmation'))
+    <div class="text-sm text-blue-600">
+        {{ session('confirmation') }}
+    </div>
+    @endif
     <table class="table table-auto border-2 bg-gray-100">
         <thead class="font-bold">
             <tr>
@@ -22,7 +27,7 @@
                     </div>
                 </td>
                 <td>
-                    <x-primary-button class="mb-1" onclick="confirm('Are you sure to approve this comment from {{ $comment->user->name }}?') || event.stopImmediatePropagation()" wire:click="reject({{ $comment->id }})">
+                    <x-primary-button class="mb-1" onclick="confirm('Are you sure to approve this comment from {{ $comment->user->name }}?') || event.stopImmediatePropagation()" wire:click="approve({{ $comment->id }})">
                         Approve
                     </x-primary-button>
                     <x-jet-button onclick="confirm('Are you sure to reject this comment from {{ $comment->user->name }}?') || event.stopImmediatePropagation()" wire:click="reject({{ $comment->id }})">
