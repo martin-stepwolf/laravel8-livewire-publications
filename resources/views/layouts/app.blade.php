@@ -35,6 +35,21 @@
 
             <!-- Page Content -->
             <main>
+            @if (session()->has('message'))
+            <div class="bg-blue-500 text-white text-sm font-bold p-4">
+                <p>{{ session('message') }}</p>
+            </div>
+            @endif
+            @if (session()->has('warning'))
+            <div class="bg-yellow-500 text-white text-sm font-bold p-4">
+                <p>{{ session('warning') }}</p>
+            </div>
+            @endif
+            @if (session()->has('danger'))
+            <div class="bg-red-500 text-white text-sm font-bold p-4">
+                <p>{{ session('danger') }}</p>
+            </div>
+            @endif
                 {{ $slot }}
             </main>
         </div>

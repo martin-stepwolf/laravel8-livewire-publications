@@ -8,4 +8,9 @@
         <x-textarea id="content" wire:model="content" required />
     </div>
     <x-jet-validation-errors class="mb-4" />
+    @if (session()->has('confirmation'))
+    <div class="text-sm text-blue-600">
+        {{ session('confirmation') }}
+    </div>
+    @endif
 </div>

@@ -32,10 +32,11 @@ class PublicationController extends Controller
 
     public function user_index(Request $request)
     {
-        // TODO: Implement a validation for urls from no owners
-        // if ($request->user()->id !== $request->user)
-        //     // TODO: show a flash message about this is a unauthorized action
-        //     return back();
+        if ($request->user != auth()->user()->id)
+            return redirect()
+                ->route('user.publication.index', ['user' => auth()->user()->id])
+                ->with('warning', 'You are allowed to manage only your publication.');
+
         return view('publication/user-index');
     }
 
@@ -49,8 +50,9 @@ class PublicationController extends Controller
     {
         $publication = Publication::findOrFail($request->id);
         if ($request->user()->id !== $publication->user_id)
-            // TODO: show a flash message about this is a unauthorized action
-            return back();
+            return redirect()
+                ->route('user.publication.index', ['user' => auth()->user()->id])
+                ->with('warning', 'You are allowed to manage only your publication.');
         return view('publication/user-show', compact('publication'));
     }
 }

@@ -35,6 +35,7 @@ class PublicationComponent extends Component
             'content' => $this->content
         ]);
 
+        session()->flash('confirmation', "Publication $publication->id successfully created.");
         $this->edit($publication->id);
     }
 
@@ -65,6 +66,7 @@ class PublicationComponent extends Component
             'content' => $this->content
         ]);
 
+        session()->flash('confirmation', "Publication $publication->id successfully updated.");
         $this->default();
     }
 
@@ -76,6 +78,7 @@ class PublicationComponent extends Component
             $this->authorize('edit', $publication);
 
         $publication->delete();
+        session()->flash('confirmation', "Publication $publication->id successfully deleted.");
     }
 
     public function default()
