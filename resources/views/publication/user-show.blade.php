@@ -30,19 +30,19 @@
                         'comment_state_id' => 2
                         ])
                     </div>
-                    <div class="bg-blue-100 my-2">
-                        @livewire('publication-comments', [
-                        'title' => 'Comments on hold',
-                        'publication_id' => $publication->id,
-                        'comment_state_id' => 2
-                        ])
-                    </div>
-                    <div class="bg-red-100">
+                    <div class="bg-red-100  mb-2">
                         @livewire('publication-comments', [
                         'title' => 'Comments rejected',
                         'publication_id' => $publication->id,
                         'comment_state_id' => 3
                         ])
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">New comments on hold</h3>
+                        <div>
+                            @livewire('comments-component', [
+                            'publication_id' => $publication->id,])
+                        </div>
                     </div>
                 </div>
             </div>

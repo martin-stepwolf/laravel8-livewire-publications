@@ -11,18 +11,17 @@ class NewCommentNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private string $qualifierName, $publicationTitle, $publicationComment;
+    private $user, $comment;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $qualifierName, string $publicationTitle, string $publicationComment)
+    public function __construct($user, $comment)
     {
-        $this->qualifierName = $qualifierName;
-        $this->publicationTitle = $publicationTitle;
-        $this->publicationComment = $publicationComment;
+        $this->user = $user;
+        $this->comment = $comment;
     }
 
     /**
@@ -45,10 +44,14 @@ class NewCommentNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line("$this->qualifierName has made a comment in your publication '$this->publicationTitle'")
-            ->line("Commentary: $this->publicationComment")
+            ->greeting("Hello {$this->comment->publication->user->name}!")
+            ->line("{$this->comment->user->name} has made a comment in your publication '{$this->comment->publication->title}'")
+            ->line("Commentary: {$this->comment->content}")
             ->line("This commentary is public until you approve it.")
-            ->action('Approve this commentary', url('/'))
+            ->action('See this publication', route('user.publication.show', [
+                'user' => $this->comment->publication->user->id,
+                'id' => $this->comment->publication->id
+            ]))
             ->line('Thank you for using our application!');
     }
 

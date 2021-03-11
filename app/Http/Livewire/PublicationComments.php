@@ -16,12 +16,13 @@ class PublicationComments extends Component
 
     public function render()
     {
+        // BUG: Update the data when a comment is approved or rejected from comments-component
         return view('livewire.publication-comments', [
             'title' => $this->title,
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
                 'comment_state_id' => $this->comment_state_id
-            ])->paginate(4)
+            ])->orderBy('created_at', 'desc')->paginate(4)
         ]);
     }
 }

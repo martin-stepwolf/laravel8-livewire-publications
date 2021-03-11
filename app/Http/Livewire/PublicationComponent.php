@@ -24,9 +24,10 @@ class PublicationComponent extends Component
     {
         return view('livewire.publication.index.index-component', [
             'publications' => auth()->user()
-                ->publications()->where('title', 'LIKE', "%$this->q%")
-                // TODO: search also by content
-                // ->orWhere('content', 'LIKE', "%$this->q%")
+                ->publications()->where(function ($query) {
+                    $query->where('title', 'LIKE', "%$this->q%")
+                        ->orWhere('content', 'LIKE', "%$this->q%");
+                })
                 ->orderBy('id', 'desc')->paginate(4)
         ]);
     }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class PublicationController extends Controller
 {
+    private $q;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +16,14 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
+        $this->q = $request->q;
+
         return view('publication/index', [
-            'publications' => Publication::orderBy('id', 'desc')
-                ->where('title', 'LIKE', "%$request->q%")->paginate(10),
-            'q' => $request->q
+            'publications' => Publication::where(function ($query) {
+                $query->where('title', 'LIKE', "%{$this->q}%")
+                    ->orWhere('content', 'LIKE', "%{$this->q}%");
+            })->orderBy('created_at', 'desc')->paginate(8),
+            'q' => $this->q
         ]);
     }
 

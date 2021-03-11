@@ -27,12 +27,9 @@ class SendEmailNewCommentNotification implements ShouldQueue
      */
     public function handle(NewComment $event)
     {
-        \Illuminate\Support\Facades\Log::channel('daily')->warning($event->getUser());
-        // \Illuminate\Support\Facades\Log::channel('daily')->warning("$comment");
         $notification = new NewCommentNotification(
-            $event->getUser()->name,
-            $event->getComment()->publication->title,
-            $event->getComment()->content,
+            $event->getUser(),
+            $event->getComment()
         );
 
         $user = \App\Models\User::find($event->getComment()->publication->user_id);
