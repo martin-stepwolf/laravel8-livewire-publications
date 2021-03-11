@@ -38,7 +38,7 @@
                             @csrf
                             <div>
                                 <x-jet-label for="content" value="{{ __('Content') }}" />
-                                <textarea id="content" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" type="text" name="content" required></textarea>
+                                <x-textarea id="content" name="content" required/>
                             </div>
                             <x-jet-validation-errors class="mb-4" />
                             <div class="flex items-center justify-end mt-4">
