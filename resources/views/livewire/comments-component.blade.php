@@ -4,7 +4,7 @@
         {{ session('confirmation') }}
     </div>
     @endif
-    <table class="table table-auto border-2 bg-gray-100">
+    <table class="table table-auto border-2 bg-gray-100 w-full">
         <thead class="font-bold">
             <tr>
                 <td class="border px-4 py-2">
@@ -37,7 +37,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="2">There are not comments</td>
+                <td class="2 text-center text-red-500" colspan="2">There are not comments</td>
             </tr>
             @endforelse
         </tbody>

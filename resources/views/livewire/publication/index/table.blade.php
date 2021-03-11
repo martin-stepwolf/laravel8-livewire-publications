@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-auto border-2 bg-gray-100">
+    <table class="table table-auto border-2 w-full bg-gray-100">
         <thead class="font-bold">
             <tr>
                 <td class="border px-4 py-2">
@@ -42,7 +42,7 @@
             </tr>
             @empty
             <tr>
-                <td class="border px-4 py-2" colspan="4">There are not publications</td>
+                <td class="border px-4 py-2 text-center text-red-500" colspan="4">There are not publications</td>
             </tr>
             @endforelse
         </tbody>

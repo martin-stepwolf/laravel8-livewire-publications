@@ -9,7 +9,7 @@
             </div>
         </div>
         @empty
-        <div class="px-4 py-2">endif are not comments.</div>
+        <div class="px-4 py-2  text-center text-red-500 lg:col-span-2">There are not comments.</div>
         @endforelse
     </div>
     <div class="mx-4">
