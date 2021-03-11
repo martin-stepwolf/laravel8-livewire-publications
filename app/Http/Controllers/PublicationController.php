@@ -15,7 +15,7 @@ class PublicationController extends Controller
     public function index(Request $request)
     {
         return view('publication/index', [
-            'publications' => Publication::orderBy('id', 'desc')
+            'publications' => Publication::orderBy('created_at', 'desc')
                 ->where('title', 'LIKE', "%$request->q%")->paginate(10),
             'q' => $request->q
         ]);

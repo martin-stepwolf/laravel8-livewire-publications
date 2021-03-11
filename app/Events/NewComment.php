@@ -22,8 +22,8 @@ class NewComment
      * @return void
      */
 
-    public $user;
-    public $comment;
+    private $user;
+    private $comment;
 
     public function __construct(User $user, Comment $comment)
     {

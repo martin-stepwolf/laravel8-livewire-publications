@@ -14,9 +14,13 @@ class CommentController extends Controller
             'comment_state_id' => 1
         ]);
 
-        // If the user is not the author of the publication, an email is sent 
-        if (auth()->user()->id != $comment->publication->user_id)
-            event(new NewComment(auth()->user(), $comment));
+        // If the user is the author, the email is not and the comment is approved 
+        if (auth()->user()->id == $comment->publication->user_id) {
+            $comment->update(['comment_state_id' => 2]);
+            return back()->with('message', 'Your comment was created successfully.');
+        }
+
+        event(new NewComment(auth()->user(), $comment));
 
         return back()->with('message', 'Your comment was created successfully, wait for a approbation by the owner.');
     }

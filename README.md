@@ -112,6 +112,7 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 -   [Laravel 8](https://laravel.com/docs/8.x/releases/) - PHP framework.
 -   [Laravel Sail](https://laravel.com/docs/8.x/sail) - Docker development environment.
 -   [Laravel Jetstream - Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.
+-   [Tailwindcss](https://tailwindcss.com/) - CSS Framework.
 
 ### Authors
 
@@ -127,6 +128,7 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 ### References :books:
 
+- [Taildwind CSS Course](https://platzi.com/clases/tailwind-css/)
 - [Livewire with Laravel Basic Course](https://www.youtube.com/playlist?list=PLhCiuvlix-rSRRmZAL2CNOMAUjgEiFoSl)
 - [Laravel 8 Introduction Course](https://platzi.com/clases/intro-laravel/)
 - [Test Driven Development with Laravel Course](https://platzi.com/clases/laravel-tdd/)

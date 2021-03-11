@@ -19,7 +19,7 @@ class CommentsComponent extends Component
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
                 'comment_state_id' => 1
-            ])->paginate(4)
+            ])->orderBy('created_at', 'asc')->paginate(4)
         ]);
     }
 

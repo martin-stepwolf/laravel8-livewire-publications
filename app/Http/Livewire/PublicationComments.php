@@ -22,7 +22,7 @@ class PublicationComments extends Component
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
                 'comment_state_id' => $this->comment_state_id
-            ])->paginate(4)
+            ])->orderBy('created_at', 'desc')->paginate(4)
         ]);
     }
 }
