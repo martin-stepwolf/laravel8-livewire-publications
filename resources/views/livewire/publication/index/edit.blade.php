@@ -4,9 +4,9 @@
     </div>
     @include('livewire.publication.index.form')
     <div class="flex items-center justify-end mt-4">
-        <x-jet-button class="ml-4" wire:click="update">
+        <x-primary-button class="ml-4" wire:click="update">
             Update
-        </x-jet-button>
+        </x-primary-button>
         <x-jet-danger-button class="ml-4" wire:click="default">
             Cancel
         </x-jet-danger-button>

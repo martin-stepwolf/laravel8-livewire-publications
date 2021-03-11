@@ -45,9 +45,9 @@
                                 <span class="text-sm">
                                     Note: The comment should be approved by the author.
                                 </span>
-                                <x-jet-button class="ml-4">
+                                <x-primary-button class="ml-4">
                                     Send
-                                </x-jet-button>
+                                </x-primary-button>
                             </div>
                         </form>
                     </div>
