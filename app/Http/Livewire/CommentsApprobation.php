@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CommentsComponent extends Component
+class CommentsApprobation extends Component
 {
     use WithPagination, AuthorizesRequests;
 
@@ -15,7 +15,7 @@ class CommentsComponent extends Component
 
     public function render()
     {
-        return view('livewire.comments-component', [
+        return view('livewire.comments-approbation', [
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
                 'comment_state_id' => 1

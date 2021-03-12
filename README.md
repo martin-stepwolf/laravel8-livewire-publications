@@ -1,19 +1,22 @@
-# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_process-yellow) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
+# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_refactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green) ![Coverage](https://img.shields.io/badge/coverage-66%25-yellowgreen) ![Tests](https://img.shields.io/badge/tests-100%25-green)
 
-_System to make publications and comments._
+_System to make publications and comments - Job Interview._
 
 ### Project goal by martin-stepwolf :goal_net:
 
-This was a part of a interview where I completed some [challenges and questions](challenges.md).
+This was a part of a interview where I completed some [challenges and questions](challenges.md) and created a Laravel project.
 
-In the interview I had to make a Laravel project with similar features I have made in other personal projects, so I decided to challenge me by creating a project with **Jetstream + Livewire - Blade**. (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap).
+I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap), because many features I have implemented in other personal projects.
 
 ### Achievements :star2:
 
 - Completed all the challenges.
-- Implemented a CRUD with Livewire.
+- Implemented a **CRUD and dynamic components with Livewire**.
 - Implemented an Event, Listener and Notification to sent an email as Queue.
-- Implemented design with Tailwindcss according to Jetstream components and styles.
+- Implemented **design with Tailwindcss** according to Jetstream components and styles.
+- Implemented professional features like pagination, searching, flash messages, etc.
+- Implemented basic security like Access Policies.
+- Implemented Testing with PHPUnit to Models and Controllers.
 
 ---
 ## Getting Started :rocket:
@@ -58,7 +61,7 @@ Create the images and run the services (laravel app, mysql, redis and mailhog):
 sail up
 ```
 
-With Laravel Sail you can run commands as docker-compose (docker-compose up -d = sail up -d) and php(e.g php artisan migrate = sail artisan migrate). To run Composer, Artisan, and Node / NPM commands just add sail at the beginning (e.g sail npm install). More information [here](https://laravel.com/docs/8.x/sail).
+With Laravel Sail you can run commands as docker-compose (e.g docker-compose up -d = sail up -d) and php(e.g php artisan migrate = sail artisan migrate). To run Composer, Artisan, and Node / NPM commands just add sail at the beginning (e.g sail npm install). More information [here](https://laravel.com/docs/8.x/sail).
 
 Then generate the application key.
 
@@ -84,7 +87,7 @@ Note: JavaScript and CSS files are loaded in public/css and public/js, you do no
 
 ### Backend testing
 
-There are some test for Models and Controller, Jetstream also has its tests about its features, this project **was not worked with Test-Driven-Testing due to Livewire**, this is a different way to work. All this test you can run it with:
+There are some test for Models and Controller, Jetstream also has its tests about its features, for Livewire components there are not tests. You can run available tests with:
 
 ```
 sail artisan test
@@ -95,7 +98,7 @@ sail artisan test
 
 ### Running Queues
 
-There are some processes to send an email when a publication has a new comment, to run it execute:
+There is a queue generated when a publication has a new comment and an email is sent to the publication owner, to run queues execute:
 
 ```
 sail artisan queue:listen

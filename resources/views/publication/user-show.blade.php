@@ -40,7 +40,7 @@
                     <div>
                         <h3 class="font-bold text-lg">New comments on hold</h3>
                         <div>
-                            @livewire('comments-component', [
+                            @livewire('comments-approbation', [
                             'publication_id' => $publication->id,])
                         </div>
                     </div>
