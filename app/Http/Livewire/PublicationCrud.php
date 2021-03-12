@@ -7,7 +7,7 @@ use Livewire\WithPagination;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class PublicationComponent extends Component
+class PublicationCrud extends Component
 {
     use WithPagination, AuthorizesRequests;
 
@@ -22,7 +22,7 @@ class PublicationComponent extends Component
 
     public function render()
     {
-        return view('livewire.publication.index.index-component', [
+        return view('livewire.publication-crud.index', [
             'publications' => auth()->user()
                 ->publications()->where(function ($query) {
                     $query->where('title', 'LIKE', "%$this->q%")

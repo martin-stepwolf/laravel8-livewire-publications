@@ -4,7 +4,7 @@
         {{ session('confirmation') }}
     </div>
     @endif
-    <table class="table table-auto border-2 bg-gray-100">
+    <table class="table table-auto border-2 bg-gray-100 w-full">
         <thead class="font-bold">
             <tr>
                 <td class="border px-4 py-2">
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($comments as $comment)
+            @forelse($comments as $comment)
             <tr>
                 <td class="border px-4 py-2">
                     <p class="py-1 text-justify">
@@ -35,7 +35,11 @@
                     </x-jet-button>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td class="2 text-center text-red-500" colspan="2">There are not comments</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
     {{ $comments->links() }}

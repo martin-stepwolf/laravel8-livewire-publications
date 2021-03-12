@@ -1,7 +1,7 @@
 {
     "name": "martin-stepwolf/laravel8-livewire-publications",
     "type": "project",
-    "description": "System to make publications and comments.",
+    "description": "System to make publications and comments - (Job Interview).",
     "keywords": [
         "framework",
         "laravel",
@@ -9,6 +9,12 @@
         "laravel-jetstream"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Martín Campos",
+            "homepage": "https://www.martin-stepwolf.com"
+        }
+    ],
     "require": {
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
