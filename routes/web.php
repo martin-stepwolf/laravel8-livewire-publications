@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
             'index'
         ]
     )->name('publication.index');
+    // TODO: implement URL Slug
     Route::get(
         'publications/{publication}',
         [

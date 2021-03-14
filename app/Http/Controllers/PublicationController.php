@@ -13,11 +13,17 @@ class PublicationController extends Controller
     {
         $this->q = $request->q;
 
-        return view('publication/index', [
-            'publications' => Publication::where(function ($query) {
-                $query->where('title', 'LIKE', "%{$this->q}%")
-                    ->orWhere('content', 'LIKE', "%{$this->q}%");
-            })->orderBy('created_at', 'desc')->paginate(8),
+        $publications = Publication::where(function ($query) {
+            $query->where('title', 'LIKE', "%{$this->q}%")
+                ->orWhere('content', 'LIKE', "%{$this->q}%");
+        })->orderBy('created_at', 'desc')->paginate(8);
+
+        // If there are some value in the search it is added to the links
+        // publications?q=search&page=3
+        if ($this->q != '')
+            $publications->appends(['q' => $this->q]);
+
+        return view('publication/index', compact('publications') + [
             'q' => $this->q
         ]);
     }

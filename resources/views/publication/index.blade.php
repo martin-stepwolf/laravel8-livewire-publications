@@ -34,8 +34,7 @@
                 <div class="border px-4 py-2 text-center text-red-500 lg:col-span-2">There are not publications</div>
                 @endforelse
             </div>
-            <!-- BUG: Add the pagination in the links -->
-            {{ $publications->links() }}
+            {{ $publications->render() }}
         </div>
     </div>
 </x-app-layout>
