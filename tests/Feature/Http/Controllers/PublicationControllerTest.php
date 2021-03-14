@@ -63,7 +63,7 @@ class PublicationControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $response = $this->actingAs($user, 'sanctum')->get("/publications/$publication->id");
+        $response = $this->actingAs($user, 'sanctum')->get("/publications/$publication->slug");
 
         $response->assertStatus(200);
         $response->assertSee($publication->title);

@@ -14,7 +14,7 @@ class PublicationCrud extends Component
     public $publication_id, $title, $content, $q;
 
     protected $rules = [
-        'title' => 'required|min:8',
+        'title' => 'required|min:8|unique:publications',
         'content' => 'required|min:15',
     ];
 
