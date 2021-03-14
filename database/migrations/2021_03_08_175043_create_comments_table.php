@@ -23,7 +23,7 @@ class CreateCommentsTable extends Migration
             $table->text('content');
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('publication_id')->references('id')->on('publications');
+            $table->foreign('publication_id')->references('id')->on('publications')->onDelete('cascade');
             $table->foreign('comment_state_id')->references('id')->on('comment_states');
 
             $table->timestamps();
