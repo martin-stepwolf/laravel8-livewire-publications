@@ -26,7 +26,7 @@
                         <b>{{ $publication->user->name}} - {{ $publication->created_at->diffForHumans()}}</b> |
                         Comments: {{ $publication->comments->where('comment_state_id', 2)->count()}}
                     </div>
-                    <a href="{{ route('publication.show', $publication->id) }}" class="text-gray-700 underline">
+                    <a href="{{ route('publication.show', $publication) }}" class="text-gray-700 underline">
                         See more
                     </a>
                 </div>

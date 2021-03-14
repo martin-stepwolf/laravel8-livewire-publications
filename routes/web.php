@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,45 +19,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::middleware('auth:sanctum')->group(function () {
     Route::get(
         'publications',
-        [
-            App\Http\Controllers\PublicationController::class,
-            'index'
-        ]
+        [PublicationController::class, 'index']
     )->name('publication.index');
-    // TODO: implement URL Slug
+
     Route::get(
-        'publications/{publication}',
-        [
-            App\Http\Controllers\PublicationController::class,
-            'show'
-        ]
+        'publications/{publication:slug}',
+        [PublicationController::class, 'show']
     )->name('publication.show');
+
     Route::post(
         'publications/{publication}/comments/store',
-        [
-            App\Http\Controllers\CommentController::class,
-            'store'
-        ]
+        [CommentController::class, 'store']
     )->name('publication.comment.store');
+
     Route::get(
         'users/{user}/publications',
-        [
-            App\Http\Controllers\PublicationController::class,
-            'user_index'
-        ]
+        [PublicationController::class, 'user_index']
     )->name('user.publication.index');
+
     Route::get(
         'users/{user}/publications/{id}',
-        [
-            App\Http\Controllers\PublicationController::class,
-            'user_show'
-        ]
+        [PublicationController::class, 'user_show']
     )->name('user.publication.show');
 });
