@@ -22,14 +22,16 @@ class PublicationCrud extends Component
 
     public function render()
     {
-        return view('livewire.publication-crud.index', [
-            'publications' => auth()->user()
-                ->publications()->where(function ($query) {
-                    $query->where('title', 'LIKE', "%$this->q%")
-                        ->orWhere('content', 'LIKE', "%$this->q%");
-                })
-                ->orderBy('id', 'desc')->paginate(4)
-        ]);
+        $publications = auth()->user()
+            ->publications()->where(function ($query) {
+                $query->where('title', 'LIKE', "%$this->q%")
+                    ->orWhere('content', 'LIKE', "%$this->q%");
+            })
+            ->orderBy('id', 'desc')->paginate(4);
+
+        // TODO: little bug in pagination when a user search something
+
+        return view('livewire.publication-crud.index', compact('publications'));
     }
 
     public function store()

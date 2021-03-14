@@ -13,6 +13,6 @@
         @endforelse
     </div>
     <div class="mx-4">
-        {{ $comments->links() }}
+        {{ $comments->render() }}
     </div>
 </div>

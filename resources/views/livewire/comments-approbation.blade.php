@@ -42,5 +42,5 @@
             @endforelse
         </tbody>
     </table>
-    {{ $comments->links() }}
+    {{ $comments->render() }}
 </div>

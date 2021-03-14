@@ -12,8 +12,6 @@ class PublicationControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    // TODO: Add test to search function
-
     public function test_index_empty()
     {
         $user = User::factory()->create();
@@ -22,6 +20,26 @@ class PublicationControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('There are not publications');
+    }
+
+    public function test_index_search()
+    {
+        $user = User::factory()->create();
+        Publication::factory(16)->create([
+            'user_id' => $user->id
+        ]);
+        $publication = Publication::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $response_title = $this->actingAs($user, 'sanctum')->get("/publications/?q=$publication->title");
+        $response_title->assertStatus(200);
+        $response_title->assertSee($publication->title);
+
+        // Note: the controller search by all the content, not just for excerpt
+        $response_title = $this->actingAs($user, 'sanctum')->get("/publications/?q=$publication->excerpt");
+        $response_title->assertStatus(200);
+        $response_title->assertSee($publication->excerpt);
     }
 
     public function test_index()

@@ -35,7 +35,8 @@
                     <x-jet-button class="mb-1" wire:click="edit({{ $publication->id }})">
                         Edit
                     </x-jet-button> <br>
-                    <x-jet-danger-button onclick="confirm('Are you sure to delete this publication {{ $publication->id }}?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
+                    <!-- TODO: Implement better confirmation message -->
+                    <x-jet-danger-button onclick="confirm('Are you sure to delete this publication {{ $publication->id }} with {{ $publication->comments->count() }} comments?') || event.stopImmediatePropagation()" wire:click="destroy({{ $publication->id }})">
                         Delete
                     </x-jet-danger-button>
                 </td>
@@ -47,6 +48,5 @@
             @endforelse
         </tbody>
     </table>
-    <!-- BUG: If the user search the page is the same -->
-    {{ $publications->links() }}
+    {{ $publications->render() }}
 </div>
