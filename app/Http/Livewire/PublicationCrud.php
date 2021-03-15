@@ -65,7 +65,7 @@ class PublicationCrud extends Component
         $this->validate();
         $publication = Publication::find($this->publication_id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $publication->user_id)
+        if (auth()->user()->id != $publication->user_id)
             $this->authorize('update', $publication);
 
         $publication->update([
@@ -81,7 +81,7 @@ class PublicationCrud extends Component
     {
         $publication = Publication::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $publication->user_id)
+        if (auth()->user()->id != $publication->user_id)
             $this->authorize('edit', $publication);
 
         $publication->delete();
