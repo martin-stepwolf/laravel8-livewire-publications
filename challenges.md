@@ -39,15 +39,16 @@ and for the Model Comment:
     }
 ```
 
-### 3. With the last Models create a query with Eloquent that gets all the publications with commentaries that contains "Hola" and be approved.
+### 3. With the last Models create a query with Eloquent that gets all the publications with commentaries that contains "hello" and be approved.
 
 ```
-<!-- TODO: Check in a real environment if it works -->
-Publication::all()->commentaries
-    ->where('status', 'approved')
-    ->where('content', 'like', '%Hola%')
-    ->get();
+$publications = Publication::withCount(['comments' => function ($query) {
+    $query->where('status', approved);
+    $query->where('content', 'like', '%hello%');
+}])->get()->where('comments_count', '>', 0);
 ```
+
+`$publications` has all the publications with more than 0 commentaries approved and contains `Hello`. Then with `$publication->comments` we get the comments approved that contains `hello` and `$publication->comment->count()` we get how many comments.
 
 ### 4. What are the advantages of migrations in a production server?
 
