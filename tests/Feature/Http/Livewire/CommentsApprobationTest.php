@@ -65,16 +65,15 @@ class CommentsApprobationTest extends TestCase
             'comment_state_id' => 1
         ]);
 
-        // BUG: this test does not work
-        // Livewire::actingAs($user)
-        //     ->test(CommentsApprobation::class)
-        //     ->set('publication_id', $publication->id)
-        //     ->call('approve', $comment->id);
+        Livewire::actingAs($user)
+            ->test(CommentsApprobation::class)
+            ->set('publication_id', $publication->id)
+            ->call('approve', $comment->id);
 
-        // $this->assertDatabaseHas('comments', [
-        //     'content' => $comment->content,
-        //     'comment_state_id' => 2
-        // ]);
+        $this->assertDatabaseHas('comments', [
+            'content' => $comment->content,
+            'comment_state_id' => 2
+        ]);
     }
 
     public function test_comment_can_be_rejected()
@@ -92,15 +91,14 @@ class CommentsApprobationTest extends TestCase
             'comment_state_id' => 1
         ]);
 
-        // BUG: this test does not work
-        // Livewire::actingAs($user)
-        //     ->test(CommentsApprobation::class)
-        //     ->set('publication_id', $publication->id)
-        //     ->call('approve', $comment->id);
+        Livewire::actingAs($user)
+            ->test(CommentsApprobation::class)
+            ->set('publication_id', $publication->id)
+            ->call('reject', $comment->id);
 
-        // $this->assertDatabaseHas('comments', [
-        //     'content' => $comment->content,
-        //     'comment_state_id' => 3
-        // ]);
+        $this->assertDatabaseHas('comments', [
+            'content' => $comment->content,
+            'comment_state_id' => 3
+        ]);
     }
 }
