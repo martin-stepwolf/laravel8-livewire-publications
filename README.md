@@ -15,8 +15,8 @@ I decided to challenge me by working with **Jetstream + Livewire - Blade** (inst
 - Implemented an Event, Listener and Notification to sent an email as Queue.
 - Implemented **design with Tailwindcss** according to Jetstream components and styles.
 - Implemented professional features like pagination, searching, flash messages, etc.
-- Implemented basic security like Access Policies.
-- Implemented Testing with PHPUnit to Models and Controllers.
+- Implemented Testing with PHPUnit to Models, Controllers and **Livewire components**.
+- Fixed some bugs with testing and investigation.
 
 ---
 ## Getting Started :rocket:
@@ -87,7 +87,7 @@ Note: JavaScript and CSS files are loaded in public/css and public/js, you do no
 
 ### Backend testing
 
-There are some test for Models and Controller, Jetstream also has its tests about its features, for Livewire components there are not tests. You can run available tests with:
+There are some test for Models and Controller, Jetstream also has its tests about its features, for Livewire components there are some tests to validate its functions and placement in some view. You can run available tests with:
 
 ```
 sail artisan test
@@ -123,7 +123,7 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 ### Contributing
 
-You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-livewire-publications/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-livewire-publications/pulls).
+You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-livewire-publications/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-livewire-publications/pulls), there are many Bugs you can clean.
 
 ### License
 

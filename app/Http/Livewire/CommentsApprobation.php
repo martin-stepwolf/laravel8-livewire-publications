@@ -28,7 +28,7 @@ class CommentsApprobation extends Component
         // TODO: send an email to the user to notify about his comment state
         $comment = Comment::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $comment->publication->user_id)
+        if (auth()->user()->id != $comment->publication->user_id)
             $this->authorize('reject', $comment);
 
         $comment->update([
@@ -42,7 +42,7 @@ class CommentsApprobation extends Component
     {
         $comment = Comment::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $comment->publication->user_id)
+        if (auth()->user()->id != $comment->publication->user_id)
             $this->authorize('reject', $comment);
 
         $comment->update([
