@@ -1,12 +1,12 @@
-# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_refactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green) ![Coverage](https://img.shields.io/badge/coverage-66%25-yellowgreen) ![Tests](https://img.shields.io/badge/tests-100%25-green)
+# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_refactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green) ![Coverage](https://img.shields.io/badge/coverage-100%25-green) ![Tests](https://img.shields.io/badge/tests-100%25-green)
 
 _System to make publications and comments - Job Interview._
 
 ### Project goal by martin-stepwolf :goal_net:
 
-This was a part of a interview where I completed some [challenges and questions](challenges.md) and created a Laravel project.
+This was a part of a interview where I completed some [challenges and questions](challenges.md).
 
-I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap), because many features I have implemented in other personal projects.
+I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap), because have personal projects with this features.
 
 ### Achievements :star2:
 
