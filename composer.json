@@ -28,6 +28,7 @@
         "livewire/livewire": "^2.4"
     },
     "require-dev": {
+        "eduarguz/shift-php-cs": "^3.0",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.4",
@@ -60,6 +61,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

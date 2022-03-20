@@ -15,14 +15,13 @@ use Illuminate\Queue\SerializesModels;
 class NewComment
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-
     private $user;
+
     private $comment;
 
     public function __construct(User $user, Comment $comment)

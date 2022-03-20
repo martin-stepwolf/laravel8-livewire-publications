@@ -22,12 +22,13 @@ class PublicationFactory extends Factory
     public function definition()
     {
         $date = $this->faker->dateTimeThisMonth($max = 'now', $timezone = null);
+
         return [
-            'user_id' => rand(2, 30),
+            'user_id' => random_int(2, 30),
             'title' => $this->faker->text(50),
             'content' => $this->faker->text(1200),
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
         ];
     }
 }

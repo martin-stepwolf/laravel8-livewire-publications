@@ -6,8 +6,8 @@ use App\Http\Livewire\CommentsApprobation;
 use App\Models\Comment;
 use App\Models\Publication;
 use App\Models\User;
-use Livewire\Livewire;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class CommentsApprobationTest extends TestCase
@@ -18,7 +18,7 @@ class CommentsApprobationTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->actingAs($user)
@@ -32,14 +32,14 @@ class CommentsApprobationTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $user_comment = User::factory()->create();
         $comment = Comment::factory()->create([
             'user_id' => $user_comment->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1
+            'comment_state_id' => 1,
         ]);
 
         $this->actingAs($user)
@@ -55,14 +55,14 @@ class CommentsApprobationTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $user_comment = User::factory()->create();
         $comment = Comment::factory()->create([
             'user_id' => $user_comment->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1
+            'comment_state_id' => 1,
         ]);
 
         Livewire::actingAs($user)
@@ -72,7 +72,7 @@ class CommentsApprobationTest extends TestCase
 
         $this->assertDatabaseHas('comments', [
             'content' => $comment->content,
-            'comment_state_id' => 2
+            'comment_state_id' => 2,
         ]);
     }
 
@@ -81,14 +81,14 @@ class CommentsApprobationTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $user_comment = User::factory()->create();
         $comment = Comment::factory()->create([
             'user_id' => $user_comment->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1
+            'comment_state_id' => 1,
         ]);
 
         Livewire::actingAs($user)
@@ -98,7 +98,7 @@ class CommentsApprobationTest extends TestCase
 
         $this->assertDatabaseHas('comments', [
             'content' => $comment->content,
-            'comment_state_id' => 3
+            'comment_state_id' => 3,
         ]);
     }
 }

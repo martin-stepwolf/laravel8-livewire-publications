@@ -6,13 +6,14 @@ use App\Http\Livewire\PublicationCrud;
 use App\Models\Comment;
 use App\Models\Publication;
 use App\Models\User;
-use Livewire\Livewire;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class PublicationCrudTest extends TestCase
 {
     use RefreshDatabase;
+
     // TODO: Implement testing about the policies in update and destroy functions
 
     public function test_publication_user_index_contains_publication_crud_component()
@@ -29,7 +30,7 @@ class PublicationCrudTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->actingAs($user)
@@ -49,7 +50,7 @@ class PublicationCrudTest extends TestCase
             ->set('title', '')
             ->set('content', '')
             ->call('store')
-            ->assertHasErrors(['title', 'content']);;
+            ->assertHasErrors(['title', 'content']);
     }
 
     public function test_can_store_publication()
@@ -64,7 +65,7 @@ class PublicationCrudTest extends TestCase
 
         $this->assertDatabaseHas('publications', [
             'title' => 'Title for the publication',
-            'content' => 'Content for the publication'
+            'content' => 'Content for the publication',
         ]);
     }
 
@@ -72,7 +73,7 @@ class PublicationCrudTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         Livewire::actingAs($user)
@@ -87,7 +88,7 @@ class PublicationCrudTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         Livewire::actingAs($user)
@@ -99,7 +100,7 @@ class PublicationCrudTest extends TestCase
 
         $this->assertDatabaseHas('publications', [
             'title' => 'New title for the publication',
-            'content' => 'New content for the publication'
+            'content' => 'New content for the publication',
         ]);
     }
 
@@ -108,7 +109,7 @@ class PublicationCrudTest extends TestCase
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
             'user_id' => $user->id,
-            'title' => 'Publication to delete'
+            'title' => 'Publication to delete',
         ]);
 
         Livewire::actingAs($user)
@@ -116,7 +117,7 @@ class PublicationCrudTest extends TestCase
             ->call('destroy', $publication->id);
 
         $this->assertDatabaseMissing('publications', [
-            'title' => 'Publication to delete'
+            'title' => 'Publication to delete',
         ]);
     }
 
@@ -126,13 +127,13 @@ class PublicationCrudTest extends TestCase
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
             'user_id' => $user->id,
-            'title' => 'Publication to delete'
+            'title' => 'Publication to delete',
         ]);
         Comment::factory()->create([
             'user_id' => $user->id,
             'publication_id' => $publication->id,
             'comment_state_id' => 2,
-            'content' => 'Comment to delete also'
+            'content' => 'Comment to delete also',
         ]);
 
         Livewire::actingAs($user)

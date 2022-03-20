@@ -9,9 +9,10 @@ use Livewire\WithPagination;
 class PublicationComments extends Component
 {
     use WithPagination;
-
     public $title;
+
     public $publication_id;
+
     public $comment_state_id;
 
     public function render()
@@ -21,8 +22,8 @@ class PublicationComments extends Component
             'title' => $this->title,
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
-                'comment_state_id' => $this->comment_state_id
-            ])->orderBy('created_at', 'desc')->paginate(4)
+                'comment_state_id' => $this->comment_state_id,
+            ])->orderBy('created_at', 'desc')->paginate(4),
         ]);
     }
 }

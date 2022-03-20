@@ -16,7 +16,7 @@ class PublicationCommentsTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->actingAs($user)
@@ -29,7 +29,7 @@ class PublicationCommentsTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->actingAs($user)
@@ -43,12 +43,12 @@ class PublicationCommentsTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
         $comment = Comment::factory()->create([
             'user_id' => $user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 2
+            'comment_state_id' => 2,
         ]);
 
         $this->actingAs($user)

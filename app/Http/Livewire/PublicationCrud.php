@@ -3,15 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\Publication;
-use Livewire\WithPagination;
-use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class PublicationCrud extends Component
 {
     use WithPagination, AuthorizesRequests;
+    public $publication_id;
 
-    public $publication_id, $title, $content, $q;
+    public $title;
+
+    public $content;
+
+    public $q;
 
     protected $rules = [
         'title' => 'required|min:8|unique:publications',
@@ -39,7 +44,7 @@ class PublicationCrud extends Component
         $this->validate();
         $publication = auth()->user()->publications()->create([
             'title' => $this->title,
-            'content' => $this->content
+            'content' => $this->content,
         ]);
 
         session()->flash('confirmation', "Publication $publication->id successfully created.");
@@ -50,8 +55,9 @@ class PublicationCrud extends Component
     {
         $publication = Publication::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $publication->user_id)
+        if (auth()->user()->id !== $publication->user_id) {
             $this->authorize('edit', $publication);
+        }
 
         $this->publication_id = $publication->id;
         $this->title = $publication->title;
@@ -65,12 +71,13 @@ class PublicationCrud extends Component
         $this->validate();
         $publication = Publication::find($this->publication_id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id != $publication->user_id)
+        if (auth()->user()->id != $publication->user_id) {
             $this->authorize('update', $publication);
+        }
 
         $publication->update([
             'title' => $this->title,
-            'content' => $this->content
+            'content' => $this->content,
         ]);
 
         session()->flash('confirmation', "Publication $publication->id successfully updated.");
@@ -81,8 +88,9 @@ class PublicationCrud extends Component
     {
         $publication = Publication::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id != $publication->user_id)
+        if (auth()->user()->id != $publication->user_id) {
             $this->authorize('edit', $publication);
+        }
 
         $publication->delete();
         session()->flash('confirmation', "Publication $publication->id successfully deleted.");

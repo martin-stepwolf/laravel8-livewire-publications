@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com'
+            'email' => 'test@example.com',
         ]);
         \App\Models\User::factory(29)->create();
 
-        // data to test a particular comment 
+        // data to test a particular comment
         $this->call(CommentTestSeeder::class);
         \App\Models\Publication::factory(20)->create(['user_id' => 1]);
 

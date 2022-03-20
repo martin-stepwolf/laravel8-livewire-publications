@@ -10,9 +10,8 @@ use Illuminate\Support\Str;
 class Publication extends Model
 {
     use HasFactory, Sluggable;
-
     protected $fillable = [
-        'user_id', 'title', 'content'
+        'user_id', 'title', 'content',
     ];
 
     /**
@@ -25,8 +24,8 @@ class Publication extends Model
         return [
             'slug' => [
                 'source' => 'title',
-                'onUpdate' => true
-            ]
+                'onUpdate' => true,
+            ],
         ];
     }
 

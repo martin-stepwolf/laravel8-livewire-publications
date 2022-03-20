@@ -4,8 +4,8 @@ namespace Tests\Unit\Models;
 
 use App\Models\Comment;
 use App\Models\CommentState;
-use App\Models\User;
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

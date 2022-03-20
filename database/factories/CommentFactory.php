@@ -22,13 +22,14 @@ class CommentFactory extends Factory
     public function definition()
     {
         $date = $this->faker->dateTimeThisMonth($max = 'now', $timezone = null);
+
         return [
-            'user_id' => rand(2, 30),
-            'publication_id' => rand(2, 50),
-            'comment_state_id' => rand(1, 3),
+            'user_id' => random_int(2, 30),
+            'publication_id' => random_int(2, 50),
+            'comment_state_id' => random_int(1, 3),
             'content' => $this->faker->text(300),
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
         ];
     }
 }

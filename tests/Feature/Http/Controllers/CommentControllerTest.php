@@ -16,11 +16,11 @@ class CommentControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user)->post("publications/$publication->id/comments/store", [
-            'content' => ''
+            'content' => '',
         ]);
 
         $response->assertSessionHasErrors(['content']);
@@ -31,7 +31,7 @@ class CommentControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         // BUG: Bug in auth()->user()
