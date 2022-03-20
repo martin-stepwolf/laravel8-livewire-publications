@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CommentState extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'title'
+        'title',
     ];
 
-    public function comments() 
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }

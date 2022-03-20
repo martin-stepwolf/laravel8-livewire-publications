@@ -10,8 +10,9 @@ use Illuminate\Notifications\Notification;
 class NewCommentNotification extends Notification
 {
     use Queueable;
+    private $user;
 
-    private $user, $comment;
+    private $comment;
 
     /**
      * Create a new notification instance.
@@ -47,10 +48,10 @@ class NewCommentNotification extends Notification
             ->greeting("Hello {$this->comment->publication->user->name}!")
             ->line("{$this->comment->user->name} has made a comment in your publication '{$this->comment->publication->title}'")
             ->line("Commentary: {$this->comment->content}")
-            ->line("This commentary is public until you approve it.")
+            ->line('This commentary is public until you approve it.')
             ->action('See this publication', route('user.publication.show', [
                 'user' => $this->comment->publication->user->id,
-                'id' => $this->comment->publication->id
+                'id' => $this->comment->publication->id,
             ]))
             ->line('Thank you for using our application!');
     }

@@ -3,8 +3,8 @@
 namespace Tests\Unit\Models;
 
 use App\Models\CommentState;
-use Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
+use Tests\TestCase;
 
 class CommentStateTest extends TestCase
 {

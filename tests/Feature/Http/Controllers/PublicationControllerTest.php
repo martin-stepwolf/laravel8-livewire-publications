@@ -26,10 +26,10 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         Publication::factory(16)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response_title = $this->actingAs($user, 'sanctum')->get("/publications/?q=$publication->title");
@@ -46,7 +46,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user, 'sanctum')->get('/publications');
@@ -60,7 +60,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user, 'sanctum')->get("/publications/$publication->slug");
@@ -84,7 +84,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $user_malicious = User::factory()->create();
@@ -97,7 +97,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user, 'sanctum')->get("/users/$user->id/publications");
@@ -111,7 +111,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $user_malicious = User::factory()->create();
@@ -124,7 +124,7 @@ class PublicationControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $publication = Publication::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user, 'sanctum')->get("/users/$user->id/publications/$publication->id");
