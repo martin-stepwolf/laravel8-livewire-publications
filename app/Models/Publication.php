@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class Publication extends Model
 {
     use HasFactory, Sluggable;
+
     protected $fillable = [
         'user_id', 'title', 'content',
     ];

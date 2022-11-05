@@ -15,6 +15,7 @@ use Illuminate\Queue\SerializesModels;
 class NewComment
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
     /**
      * Create a new event instance.
      *

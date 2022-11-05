@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notification;
 class NewCommentNotification extends Notification
 {
     use Queueable;
+
     private $user;
 
     private $comment;

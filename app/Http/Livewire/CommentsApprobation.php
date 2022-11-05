@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class CommentsApprobation extends Component
 {
     use WithPagination, AuthorizesRequests;
+
     public $publication_id;
 
     public function render()

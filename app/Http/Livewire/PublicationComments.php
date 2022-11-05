@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class PublicationComments extends Component
 {
     use WithPagination;
+
     public $title;
 
     public $publication_id;
