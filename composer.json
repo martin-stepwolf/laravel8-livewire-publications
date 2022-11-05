@@ -1,5 +1,5 @@
 {
-    "name": "martin-stepwolf/laravel8-livewire-publications",
+    "name": "mascam97/laravel-livewire-publications",
     "type": "project",
     "description": "System to make publications and comments - (Job Interview).",
     "keywords": [
@@ -11,8 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Martín Campos",
-            "homepage": "https://www.martin-stepwolf.com"
+            "name": "Martín S. Campos"
         }
     ],
     "require": {

@@ -1,22 +1,29 @@
-# Laravel8 Livewire Publications ![Status](https://img.shields.io/badge/status-in_refactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green) ![Coverage](https://img.shields.io/badge/coverage-100%25-green) ![Tests](https://img.shields.io/badge/tests-100%25-green)
+# Laravel Livewire Publications ![Status](https://img.shields.io/badge/status-in_refactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green) ![Tests](https://img.shields.io/badge/tests-100%25-green)
 
-_System to make publications and comments - Job Interview._
+_Job Interview for Full Stack PHP Developer. System to make publications and comments._
 
-### Project goal by martin-stepwolf :goal_net:
+### Project goal by mascam97
 
-This was a part of a interview where I completed some [challenges and questions](challenges.md).
+This was a part of an interview where I completed some [challenges and questions](challenges.md).
 
-I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI) and **Tailwindcss** (instead of Bootstrap), because have personal projects with this features.
+I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI and Vue.js) and **Tailwindcss** (instead of Bootstrap), because I have personal projects with these features.
 
 ### Achievements :star2:
 
 - Completed all the challenges.
 - Implemented a **CRUD and dynamic components with Livewire**.
-- Implemented an Event, Listener and Notification to sent an email as Queue.
+- Implemented an Event, Listener and Notification to send an email as Queue.
 - Implemented **design with Tailwindcss** according to Jetstream components and styles.
 - Implemented professional features like pagination, searching, flash messages, etc.
 - Implemented Testing with PHPUnit to Models, Controllers and **Livewire components**.
 - Fixed some bugs with testing and investigation.
+
+### TODOs
+
+- Implement [Alpine.js](https://alpinejs.dev/)
+- Implement [View Models pattern](https://github.com/spatie/laravel-view-models)
+- Improve the quality code
+- Improve the code coverage
 
 ---
 ## Getting Started :rocket:
@@ -61,7 +68,7 @@ Create the images and run the services (laravel app, mysql, redis and mailhog):
 sail up
 ```
 
-With Laravel Sail you can run commands as docker-compose (e.g docker-compose up -d = sail up -d) and php(e.g php artisan migrate = sail artisan migrate). To run Composer, Artisan, and Node / NPM commands just add sail at the beginning (e.g sail npm install). More information [here](https://laravel.com/docs/8.x/sail).
+With Laravel Sail you can run commands as docker-compose (e.g. docker-compose up -d = sail up -d) and php(e.g. php artisan migrate = sail artisan migrate). To run Composer, Artisan, and Node / NPM commands just add sail at the beginning (e.g. sail npm install). More information [here](https://laravel.com/docs/8.x/sail).
 
 Then generate the application key.
 
@@ -69,7 +76,7 @@ Then generate the application key.
 sail artisan key:generate
 ```
 
-Finally generate the database with fake data:
+Finally, generate the database with fake data:
 
 ```
 sail artisan migrate --seed
@@ -119,11 +126,11 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 ### Authors
 
--   Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
+-   Martín S. Campos - [mascam97](https://github.com/mascam97)
 
 ### Contributing
 
-You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/laravel8-livewire-publications/issues) and/or [pull requests](https://github.com/martin-stepwolf/laravel8-livewire-publications/pulls), there are many Bugs you can clean.
+You're free to contribute to this project by submitting [issues](https://github.com/mascam97/laravel-livewire-publications/issues) and/or [pull requests](https://github.com/mascam97/laravel-livewire-publications/pulls), there are many Bugs you can clean.
 
 ### License
 
