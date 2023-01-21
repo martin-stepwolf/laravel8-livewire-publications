@@ -4,7 +4,7 @@ _Job Interview for Full Stack PHP Developer. System to make publications and com
 
 ### Project goal by mascam97
 
-This was a part of an interview where I completed some [challenges and questions](challenges.md).
+This was a part of technical job interviews where I completed some [challenges and questions](.job-interview).
 
 I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI and Vue.js) and **Tailwindcss** (instead of Bootstrap), because I have personal projects with these features.
 
