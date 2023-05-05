@@ -2,7 +2,7 @@
 
 ### Question 1. 
 
-In a task it requires you to identify a string that contains the word "laravel" (case insensitive). You've written the following code:
+In a task it requires you to identify a string that contains the word "laravel" (case-insensitive). You've written the following code:
 
 ```
 <?php

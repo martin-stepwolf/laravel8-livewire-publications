@@ -1,8 +1,8 @@
 ## Challenges :star2:
 
-### 1. We need a platform with Laravel, it uses MySQL/MariaDB, a SMTP server for emails and Redis server. What are the steps you consider necessary to leave the application running in development mode?
+### 1. We need a platform with Laravel, it uses MySQL/MariaDB, an SMTP server for emails and Redis server. What are the steps you consider necessary to leave the application running in development mode?
 
--   In a past way I would create the database in PHPMyAdmin with XAMPP or Heidi with Laragon, and then I update the file [.env](.env) with the credentials. For an SMTP server I would create an account in Mailtrap, copy the credentials and paste it in the sam file .env. About Redis, I have never used honestly, but it would be the same steps, create the service and paste the credentials in the file .env.
+-   In the past I would create the database in PHPMyAdmin with XAMPP or Heidi with Laragon, and then I update the file [.env](.env) with the credentials. For an SMTP server I would create an account in Mailtrap, copy the credentials and paste it in the sam file .env.
 
 -   Now I use docker, in this case Laravel Sail provide some containers for MySQL, MailHog(SMTP server for testing) and Redis server.
 
@@ -18,6 +18,10 @@ How would you define the relationship a publication have many comments?
 
 ```
 $table->foreign('publication_id')->references('id')->on('publication');
+
+or
+
+$table->foreign('publication_id')->constrained();
 ```
 
 -   Then in the Model with **Eloquent** I set this relation as function according how Eloquent works.
@@ -58,7 +62,7 @@ There are many advantages, even since development server like:
 -   If there are some mistake or error we can undo the last updates.
 -   We can test better the database before to update the tables in the production server.
 
-And then we just run `php artisan migrate` in the production server and we have the new updates in the database without affect the real data and avoid mistakes.
+And then we just run `php artisan migrate` in the production server, and we have the new updates in the database without affect the real data and avoid mistakes.
 
 ### 5 Create a project in Laravel.
 
@@ -70,11 +74,11 @@ And I created all resources like seeders, factories, relation in the Models and 
 
 #### Part 2. Create a CRUD for my publications.
 
-With livewire I get the data with pagination, create, delete, update and look a publication. There are some validations about storing and updating data, and a basic policy to not allow delete and update publications by not owners.
+With Livewire I get the data with pagination, create, delete, update and look a publication. There are some validations about storing and updating data, and a basic policy to not allow delete and update publications by not owners.
 
 #### Part 3. Create some views to look all the publications with comments.
 
-This are static views, so I did not use livewire. All the users can look all the publications and each publication show just the approved comments.
+There are static views, so I did not use Livewire. All the users can look all the publications and each publication show just the approved comments.
 
 #### Part 4. All the user can comment just one time any publication.
 
@@ -84,4 +88,4 @@ The resource to create the commentary and the validations were created. I also i
 
 I use an Event and Listener to catch the action, then with a Notification I sent the email, and I can look it from MailHog.
 
-To not to overload the server, these processes are executed in the background to give a fast response to the user. We can listen this processes with `sail artisan queue:listen`.
+To not overload the server, these processes are executed in the background to give a fast response to the user. We can listen this processes with `sail artisan queue:listen`.

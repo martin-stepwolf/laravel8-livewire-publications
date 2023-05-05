@@ -138,7 +138,7 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 ### References :books:
 
-- [Taildwind CSS Course](https://platzi.com/clases/tailwind-css/)
+- [Tailwind CSS Course](https://platzi.com/clases/tailwind-css/)
 - [Livewire with Laravel Basic Course](https://www.youtube.com/playlist?list=PLhCiuvlix-rSRRmZAL2CNOMAUjgEiFoSl)
 - [Laravel 8 Introduction Course](https://platzi.com/clases/intro-laravel/)
 - [Test Driven Development with Laravel Course](https://platzi.com/clases/laravel-tdd/)
