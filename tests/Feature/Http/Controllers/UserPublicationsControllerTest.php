@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class PublicationControllerTest extends TestCase
+class UserPublicationsControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -25,49 +25,7 @@ class PublicationControllerTest extends TestCase
         $this->actingAs($this->user, 'sanctum');
     }
 
-    public function test_index_empty()
-    {
-        $this->get('/publications')
-            ->assertStatus(200)
-            ->assertSee('There are not publications');
-    }
-
-    public function test_index_search()
-    {
-        Publication::factory(16)->user($this->user)->create();
-        $publication = Publication::factory()->user($this->user)->create();
-
-        $this->get("/publications/?q=$publication->title")
-            ->assertStatus(200)
-            ->assertSee($publication->title);
-
-        // Note: the controller search by all the content, not just for excerpt
-        $this->get("/publications/?q=$publication->excerpt")
-            ->assertStatus(200)
-            ->assertSee($publication->excerpt);
-    }
-
-    public function test_index()
-    {
-        $publication = Publication::factory()->user($this->user)->create();
-
-        $this->get('/publications')
-            ->assertStatus(200)
-            ->assertSee($publication->title)
-            ->assertSee($publication->excerpt);
-    }
-
-    public function test_show()
-    {
-        $publication = Publication::factory()->user($this->user)->create();
-
-        $this->get("/publications/$publication->slug")
-           ->assertStatus(200)
-           ->assertSee($publication->title)
-           ->assertSee($publication->content);
-    }
-
-    public function test_user_index_policy()
+    public function test_index_policy()
     {
         $otherUser = User::factory()->create();
         Publication::factory()->user($otherUser)->create();
@@ -76,7 +34,7 @@ class PublicationControllerTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function test_user_index()
+    public function test_index()
     {
         $publication = Publication::factory()->user($this->user)->create();
 
@@ -86,7 +44,7 @@ class PublicationControllerTest extends TestCase
             ->assertSee($publication->excerpt);
     }
 
-    public function test_user_show_policy()
+    public function test_show_policy()
     {
         $otherUser = User::factory()->create();
         $publication = Publication::factory()->user($otherUser)->create();
@@ -95,7 +53,7 @@ class PublicationControllerTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function test_user_show()
+    public function test_show()
     {
         $publication = Publication::factory()->user($this->user)->create();
 

@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CommentControllerTest extends TestCase
+class CommentsControllerTest extends TestCase
 {
     use RefreshDatabase;
 

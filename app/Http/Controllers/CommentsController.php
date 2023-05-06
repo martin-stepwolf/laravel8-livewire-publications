@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentsController extends Controller
 {
     public function store(Request $request, Publication $publication): RedirectResponse
     {
@@ -17,7 +17,7 @@ class CommentController extends Controller
             'content' => 'required|min:15|max:255',
         ]);
 
-        /** @var User $comment */
+        /** @var User $authUser */
         $authUser = $request->user();
 
         /** @var Comment $comment */

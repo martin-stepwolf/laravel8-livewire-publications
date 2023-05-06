@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\PublicationsController;
+use App\Http\Controllers\UserPublicationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,28 +25,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get(
-        'publications',
-        [PublicationController::class, 'index']
-    )->name('publication.index');
+    Route::get('publications', [PublicationsController::class, 'index'])->name('publication.index');
+    Route::get('publications/{publication:slug}', [PublicationsController::class, 'show'])->name('publication.show');
+    Route::post('publications/{publication}/comments/store', [CommentsController::class, 'store'])->name('publication.comment.store');
 
-    Route::get(
-        'publications/{publication:slug}',
-        [PublicationController::class, 'show']
-    )->name('publication.show');
-
-    Route::post(
-        'publications/{publication}/comments/store',
-        [CommentController::class, 'store']
-    )->name('publication.comment.store');
-
-    Route::get(
-        'users/{user}/publications',
-        [PublicationController::class, 'user_index']
-    )->name('user.publication.index');
-
-    Route::get(
-        'users/{user}/publications/{id}',
-        [PublicationController::class, 'user_show']
-    )->name('user.publication.show');
+    Route::get('users/{user}/publications', [UserPublicationsController::class, 'index'])->name('user.publication.index');
+    Route::get('users/{user}/publications/{id}', [UserPublicationsController::class, 'show'])->name('user.publication.show');
 });
