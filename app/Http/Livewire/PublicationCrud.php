@@ -3,7 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -28,7 +30,10 @@ class PublicationCrud extends Component
 
     public function render()
     {
-        $publications = auth()->user()
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
+        $publications = $authUser
             ->publications()->where(function ($query) {
                 $query->where('title', 'LIKE', "%$this->q%")
                     ->orWhere('content', 'LIKE', "%$this->q%");
@@ -43,7 +48,12 @@ class PublicationCrud extends Component
     public function store()
     {
         $this->validate();
-        $publication = auth()->user()->publications()->create([
+
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
+        /** @var Publication $publication */
+        $publication = $authUser->publications()->create([
             'title' => $this->title,
             'content' => $this->content,
         ]);
@@ -54,9 +64,12 @@ class PublicationCrud extends Component
 
     public function edit($id)
     {
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
         $publication = Publication::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id !== $publication->user_id) {
+        if ($authUser->id !== $publication->user_id) {
             $this->authorize('edit', $publication);
         }
 
@@ -70,9 +83,13 @@ class PublicationCrud extends Component
     public function update()
     {
         $this->validate();
+
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
         $publication = Publication::find($this->publication_id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id != $publication->user_id) {
+        if ($authUser->id != $publication->user_id) {
             $this->authorize('update', $publication);
         }
 
@@ -87,9 +104,12 @@ class PublicationCrud extends Component
 
     public function destroy($id)
     {
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
         $publication = Publication::find($id);
         // TODO: Implement a formal policy
-        if (auth()->user()->id != $publication->user_id) {
+        if ($authUser->id != $publication->user_id) {
             $this->authorize('edit', $publication);
         }
 

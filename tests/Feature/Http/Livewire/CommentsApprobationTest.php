@@ -14,36 +14,43 @@ class CommentsApprobationTest extends TestCase
 {
     use RefreshDatabase;
 
+    private User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
+
+        $this->user = User::factory()->create();
+
+        $this->actingAs($this->user);
+    }
+
     public function test_user_show_contains_comments_approbation_component()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $this->actingAs($user)
-            ->get(route('user.publication.show', ['user' => $user->id, 'id' => $publication->id]))
+        $this->get(route('user.publication.show', [
+            'user' => $this->user->id,
+            'id' => $publication->id,
+        ]))
             ->assertSuccessful()
             ->assertSeeLivewire('comments-approbation');
     }
 
     public function test_contains_on_hold_comment()
     {
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $user_comment = User::factory()->create();
+        $user = User::factory()->create();
         $comment = Comment::factory()->create([
-            'user_id' => $user_comment->id,
+            'user_id' => $user->id,
             'publication_id' => $publication->id,
             'comment_state_id' => 1,
         ]);
 
-        $this->actingAs($user)
-            ->get(route('user.publication.show', ['user' => $user->id, 'id' => $publication->id]))
+        $this->get(route('user.publication.show', ['user' => $this->user->id, 'id' => $publication->id]))
             ->assertSuccessful()
             ->assertSeeLivewire('comments-approbation')
             ->assertSee($comment->content)
@@ -52,20 +59,16 @@ class CommentsApprobationTest extends TestCase
 
     public function test_comment_can_be_approved()
     {
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $user_comment = User::factory()->create();
+        $user = User::factory()->create();
         $comment = Comment::factory()->create([
-            'user_id' => $user_comment->id,
+            'user_id' => $user->id,
             'publication_id' => $publication->id,
             'comment_state_id' => 1,
         ]);
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(CommentsApprobation::class)
             ->set('publication_id', $publication->id)
             ->call('approve', $comment->id);
@@ -78,20 +81,16 @@ class CommentsApprobationTest extends TestCase
 
     public function test_comment_can_be_rejected()
     {
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $user_comment = User::factory()->create();
+        $user = User::factory()->create();
         $comment = Comment::factory()->create([
-            'user_id' => $user_comment->id,
+            'user_id' => $user->id,
             'publication_id' => $publication->id,
             'comment_state_id' => 1,
         ]);
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(CommentsApprobation::class)
             ->set('publication_id', $publication->id)
             ->call('reject', $comment->id);

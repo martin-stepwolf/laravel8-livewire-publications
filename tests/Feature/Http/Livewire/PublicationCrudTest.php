@@ -14,27 +14,33 @@ class PublicationCrudTest extends TestCase
 {
     use RefreshDatabase;
 
+    private User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
+
+        $this->user = User::factory()->create();
+
+        $this->actingAs($this->user);
+    }
+
     // TODO: Implement testing about the policies in update and destroy functions
 
     public function test_publication_user_index_contains_publication_crud_component()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->get(route('user.publication.index', ['user' => $user->id]))
+        $this->get(route('user.publication.index', ['user' => $this->user->id]))
             ->assertSuccessful()
             ->assertSeeLivewire('publication-crud');
     }
 
     public function test_contains_user_publication()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $this->actingAs($user)
-            ->get(route('user.publication.index', ['user' => $user->id]))
+        $this->get(route('user.publication.index', ['user' => $this->user->id]))
             ->assertSuccessful()
             ->assertSeeLivewire('publication-crud')
             ->assertSee($publication->title)
@@ -43,9 +49,7 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_store_publication_validation()
     {
-        $user = User::factory()->create();
-
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->set('title', '')
             ->set('content', '')
@@ -55,9 +59,7 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_store_publication()
     {
-        $user = User::factory()->create();
-
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->set('title', 'Title for the publication')
             ->set('content', 'Content for the publication')
@@ -71,12 +73,9 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_update_publication_validation()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->set('title', '')
             ->set('content', '')
@@ -86,12 +85,9 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_update_publication()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->set('publication_id', $publication->id)
             ->set('title', 'New title for the publication')
@@ -106,13 +102,11 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_delete_publication()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
+        $publication = Publication::factory()->user($this->user)->create([
             'title' => 'Publication to delete',
         ]);
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->call('destroy', $publication->id);
 
@@ -123,20 +117,17 @@ class PublicationCrudTest extends TestCase
 
     public function test_can_delete_publication_with_comments()
     {
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
+        $publication = Publication::factory()->user($this->user)->create([
             'title' => 'Publication to delete',
         ]);
         Comment::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'publication_id' => $publication->id,
             'comment_state_id' => 2,
             'content' => 'Comment to delete also',
         ]);
 
-        Livewire::actingAs($user)
+        Livewire::actingAs($this->user)
             ->test(PublicationCrud::class)
             ->call('destroy', $publication->id);
 

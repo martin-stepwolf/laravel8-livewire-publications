@@ -33,7 +33,7 @@
                         'comment_state_id' => 2
                         ])
                     </div>
-                    @if(!$has_commented)
+                    @if(!$hasCommented)
                     <div>
                         <h3 class="font-bold text-lg">Add comment</h3>
                         <form action="{{route('publication.comment.store', $publication->id)}}" method="POST">

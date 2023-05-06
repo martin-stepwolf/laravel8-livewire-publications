@@ -5,41 +5,47 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CommentControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    private User $user;
+
+    private Publication $publication;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
+
+        $this->user = User::factory()->create();
+
+        $this->publication = Publication::factory()->user($this->user)->create();
+
+        $this->actingAs($this->user);
+    }
+
     public function test_validate_store()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
-
-        $response = $this->actingAs($user)->post("publications/$publication->id/comments/store", [
+        $this->post("publications/{$this->publication->id}/comments/store", [
             'content' => '',
-        ]);
-
-        $response->assertSessionHasErrors(['content']);
-        $response->assertStatus(302);
+        ])->assertSessionHasErrors(['content'])
+        ->assertStatus(302);
     }
 
     public function test_store()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
+        $this->post("publications/{$this->publication->id}/comments/store", [
+            'content' => 'A great publication, you know how to make a great one.',
+        ])->assertStatus(302);
+
+        $this->assertDatabaseHas('comments', [
+            'content' => 'A great publication, you know how to make a great one.',
+            'user_id' => $this->user->getKey(),
+            'publication_id' => $this->publication->getKey(),
         ]);
-
-        // BUG: Bug in auth()->user()
-        // $response = $this->actingAs($user)->post("publications/$publication->id/comments/store", [
-        //     'content' => 'A great publication, you know how to make a great one.'
-        // ]);
-
-        // $response->assertStatus(302);
-        // $this->assertDatabaseHas('comments', ['content' => 'A great publication, you know how to make a great one.']);
     }
 }

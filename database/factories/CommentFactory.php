@@ -4,7 +4,12 @@ namespace Database\Factories;
 
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @extends Factory<Comment>
+ * @method Comment create($attributes = [], ?Model $parent = null)
+ */
 class CommentFactory extends Factory
 {
     /**

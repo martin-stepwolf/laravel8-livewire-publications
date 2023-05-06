@@ -12,125 +12,96 @@ class PublicationControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    private User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
+
+        $this->user = User::factory()->create();
+
+        $this->actingAs($this->user, 'sanctum');
+    }
+
     public function test_index_empty()
     {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user, 'sanctum')->get('/publications');
-
-        $response->assertStatus(200);
-        $response->assertSee('There are not publications');
+        $this->get('/publications')
+            ->assertStatus(200)
+            ->assertSee('There are not publications');
     }
 
     public function test_index_search()
     {
-        $user = User::factory()->create();
-        Publication::factory(16)->create([
-            'user_id' => $user->id,
-        ]);
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        Publication::factory(16)->user($this->user)->create();
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $response_title = $this->actingAs($user, 'sanctum')->get("/publications/?q=$publication->title");
-        $response_title->assertStatus(200);
-        $response_title->assertSee($publication->title);
+        $this->get("/publications/?q=$publication->title")
+            ->assertStatus(200)
+            ->assertSee($publication->title);
 
         // Note: the controller search by all the content, not just for excerpt
-        $response_title = $this->actingAs($user, 'sanctum')->get("/publications/?q=$publication->excerpt");
-        $response_title->assertStatus(200);
-        $response_title->assertSee($publication->excerpt);
+        $this->get("/publications/?q=$publication->excerpt")
+            ->assertStatus(200)
+            ->assertSee($publication->excerpt);
     }
 
     public function test_index()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $response = $this->actingAs($user, 'sanctum')->get('/publications');
-
-        $response->assertStatus(200);
-        $response->assertSee($publication->title);
-        $response->assertSee($publication->excerpt);
+        $this->get('/publications')
+            ->assertStatus(200)
+            ->assertSee($publication->title)
+            ->assertSee($publication->excerpt);
     }
 
     public function test_show()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $response = $this->actingAs($user, 'sanctum')->get("/publications/$publication->slug");
-
-        $response->assertStatus(200);
-        $response->assertSee($publication->title);
-        $response->assertSee($publication->content);
-    }
-
-    public function test_user_index_empty()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user, 'sanctum')->get("/users/$user->id/publications");
-
-        $response->assertStatus(200);
-        $response->assertSee('There are not publications');
+        $this->get("/publications/$publication->slug")
+           ->assertStatus(200)
+           ->assertSee($publication->title)
+           ->assertSee($publication->content);
     }
 
     public function test_user_index_policy()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $otherUser = User::factory()->create();
+        Publication::factory()->user($otherUser)->create();
 
-        $user_malicious = User::factory()->create();
-        $response = $this->actingAs($user_malicious, 'sanctum')->get("/users/$user->id/publications");
-
-        $response->assertStatus(302);
+        $this->get("/users/$otherUser->id/publications")
+            ->assertStatus(302);
     }
 
     public function test_user_index()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $response = $this->actingAs($user, 'sanctum')->get("/users/$user->id/publications");
-
-        $response->assertStatus(200);
-        $response->assertSee($publication->title);
-        $response->assertSee($publication->excerpt);
+        $this->get("/users/{$this->user->id}/publications")
+            ->assertStatus(200)
+            ->assertSee($publication->title)
+            ->assertSee($publication->excerpt);
     }
 
     public function test_user_show_policy()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $otherUser = User::factory()->create();
+        $publication = Publication::factory()->user($otherUser)->create();
 
-        $user_malicious = User::factory()->create();
-        $response = $this->actingAs($user_malicious, 'sanctum')->get("/users/$user->id/publications/$publication->id");
-
-        $response->assertStatus(302);
+        $this->get("/users/$otherUser->id/publications/$publication->id")
+            ->assertStatus(302);
     }
 
     public function test_user_show()
     {
-        $user = User::factory()->create();
-        $publication = Publication::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $publication = Publication::factory()->user($this->user)->create();
 
-        $response = $this->actingAs($user, 'sanctum')->get("/users/$user->id/publications/$publication->id");
-
-        $response->assertStatus(200);
-        $response->assertSee($publication->title);
-        $response->assertSee($publication->content);
+        $this->get("/users/{$this->user->id}/publications/$publication->id")
+            ->assertStatus(200)
+            ->assertSee($publication->title)
+            ->assertSee($publication->content);
     }
 }

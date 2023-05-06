@@ -21,7 +21,7 @@ class PublicationComments extends Component
         // TODO: Make a better order in the views
         return view('livewire.publication-comments', [
             'title' => $this->title,
-            'comments' => Comment::where([
+            'comments' => Comment::query()->where([
                 'publication_id' => $this->publication_id,
                 'comment_state_id' => $this->comment_state_id,
             ])->orderBy('created_at', 'desc')->paginate(4),

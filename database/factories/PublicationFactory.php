@@ -3,8 +3,14 @@
 namespace Database\Factories;
 
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @extends Factory<Publication>
+ * @method Publication create($attributes = [], ?Model $parent = null)
+ */
 class PublicationFactory extends Factory
 {
     /**
@@ -30,5 +36,12 @@ class PublicationFactory extends Factory
             'created_at' => $date,
             'updated_at' => $date,
         ];
+    }
+
+    public function user(User $user): self
+    {
+        return $this->state([
+            'user_id' => $user->getKey(),
+        ]);
     }
 }

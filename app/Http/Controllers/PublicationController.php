@@ -3,49 +3,55 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationController extends Controller
 {
-    private $q;
-
     public function index(Request $request)
     {
-        $this->q = $request->q;
-
-        $publications = Publication::where(function ($query) {
-            $query->where('title', 'LIKE', "%{$this->q}%")
-                ->orWhere('content', 'LIKE', "%{$this->q}%");
-        })->orderBy('created_at', 'desc')->paginate(8);
+        $publications = Publication::query()
+            ->where('title', 'LIKE', "%{$request->input('q')}%")
+            ->orWhere('content', 'LIKE', "%{$request->input('q')}%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
 
         // If there are some value in the search it is added to the links
         // publications?q=search&page=3
-        if ($this->q != '') {
-            $publications->appends(['q' => $this->q]);
+        if ($request->input('q') != '') {
+            $publications->appends(['q' => $request->input('q')]);
         }
 
         return view('publication/index', compact('publications') + [
-            'q' => $this->q,
+            'q' => $request->input('q'),
         ]);
     }
 
     public function show(Publication $publication)
     {
-        $has_commented = false;
-        if ($publication->comments->where('user_id', auth()->user()->id)->count() !== 0) {
-            $has_commented = true;
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
+        $hasCommented = false;
+
+        if ($authUser->comments()->where('publication_id', $publication->getKey())->count() !== 0) {
+            $hasCommented = true;
         }
 
-        return view('publication/show', compact('publication') + compact('has_commented') + [
-            'comments' => $publication->comments->where('comment_state_id', 2),
+        return view('publication/show', compact('publication') + compact('hasCommented') + [
+            'comments' => $publication->comments()->where('comment_state_id', 2),
         ]);
     }
 
     public function user_index(Request $request)
     {
-        if ($request->user != auth()->user()->id) {
+        /** @var User $authUser */
+        $authUser = Auth::user();
+
+        if ($request->user != $authUser->getKey()) {
             return redirect()
-                ->route('user.publication.index', ['user' => auth()->user()->id])
+                ->route('user.publication.index', ['user' => $authUser->getKey()])
                 ->with('warning', 'You are allowed to manage only your publication.');
         }
 
