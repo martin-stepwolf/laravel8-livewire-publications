@@ -18,8 +18,6 @@ class PublicationsControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-
         $this->user = User::factory()->create();
 
         $this->actingAs($this->user, 'sanctum');

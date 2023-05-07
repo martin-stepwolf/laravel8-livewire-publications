@@ -4,6 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Comment;
 use App\Models\User;
+use App\States\Comment\Approved;
+use App\States\Comment\Pending;
+use App\States\Comment\Rejected;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -20,7 +23,7 @@ class CommentsApprobation extends Component
         return view('livewire.comments-approbation', [
             'comments' => Comment::where([
                 'publication_id' => $this->publication_id,
-                'comment_state_id' => 1,
+                'state' => Pending::$name,
             ])->orderBy('created_at', 'asc')->paginate(4),
         ]);
     }
@@ -31,15 +34,14 @@ class CommentsApprobation extends Component
         $authUser = Auth::user();
 
         // TODO: send an email to the user to notify about his comment state
-        $comment = Comment::find($id);
+        /** @var Comment $comment */
+        $comment = Comment::query()->find($id);
         // TODO: Implement a formal policy
         if ($authUser->id != $comment->publication->user_id) {
             $this->authorize('reject', $comment);
         }
 
-        $comment->update([
-            'comment_state_id' => 2,
-        ]);
+        $comment->state->transitionTo(Approved::class);
 
         session()->flash('confirmation', "Comment from {$comment->user->name} was approved.");
     }
@@ -49,15 +51,14 @@ class CommentsApprobation extends Component
         /** @var User $authUser */
         $authUser = Auth::user();
 
+        /** @var Comment $comment */
         $comment = Comment::query()->find($id);
         // TODO: Implement a formal policy
         if ($authUser->id != $comment->publication->user_id) {
             $this->authorize('reject', $comment);
         }
 
-        $comment->update([
-            'comment_state_id' => 3,
-        ]);
+        $comment->state->transitionTo(Rejected::class);
 
         session()->flash('confirmation', "Comment from {$comment->user->name} was rejected.");
     }

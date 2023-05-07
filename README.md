@@ -8,7 +8,7 @@ This was a part of technical job interviews where I completed some [challenges a
 
 I decided to challenge me by working with **Jetstream + Livewire - Blade** (instead of Laravel UI and Vue.js) and **Tailwindcss** (instead of Bootstrap), because I have personal projects with these features.
 
-### Achievements :star2:
+### Achievements 2021 :star2:
 
 - Completed all the challenges.
 - Implemented a **CRUD and dynamic components with Livewire**.
@@ -17,6 +17,10 @@ I decided to challenge me by working with **Jetstream + Livewire - Blade** (inst
 - Implemented professional features like pagination, searching, flash messages, etc.
 - Implemented Testing with PHPUnit to Models, Controllers and **Livewire components**.
 - Fixed some bugs with testing and investigation.
+
+### Achievements 2023 :star2:
+
+- Implemented some design patters: State Pattern
 
 ### TODOs
 
@@ -119,6 +123,7 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 ### Built With 🛠️
 
+-   [Laravel Model State](https://spatie.be/docs/laravel-model-states/v2/01-introduction) -  Advanced state support for Laravel models.
 -   [Laravel 8](https://laravel.com/docs/8.x/releases/) - PHP framework.
 -   [Laravel Sail](https://laravel.com/docs/8.x/sail) - Docker development environment.
 -   [Laravel Jetstream - Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.

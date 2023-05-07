@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Comment;
+use App\States\Comment\Approved;
+use App\States\Comment\Pending;
+use App\States\Comment\Rejected;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,10 +34,24 @@ class CommentFactory extends Factory
         return [
             'user_id' => random_int(2, 30),
             'publication_id' => random_int(2, 50),
-            'comment_state_id' => random_int(1, 3),
+            'state' => Pending::$name,
             'content' => $this->faker->text(300),
             'created_at' => $date,
             'updated_at' => $date,
         ];
+    }
+
+    public function approved(): self
+    {
+        return $this->state([
+            'state' => Approved::$name,
+        ]);
+    }
+
+    public function rejected(): self
+    {
+        return $this->state([
+            'state' => Rejected::$name,
+        ]);
     }
 }

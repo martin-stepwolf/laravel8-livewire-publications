@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publication;
 use App\Models\User;
+use App\States\Comment\Approved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,7 @@ class PublicationsController extends Controller
         }
 
         return view('publication/show', compact('publication') + compact('hasCommented') + [
-            'comments' => $publication->comments()->where('comment_state_id', 2),
+            'comments' => $publication->comments()->where('state', Approved::$name),
         ]);
     }
 }

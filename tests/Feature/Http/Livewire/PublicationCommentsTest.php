@@ -18,8 +18,6 @@ class PublicationCommentsTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-
         $this->user = User::factory()->create();
 
         $this->actingAs($this->user);
@@ -46,10 +44,9 @@ class PublicationCommentsTest extends TestCase
     public function test_contains_approved_comment()
     {
         $publication = Publication::factory()->user($this->user)->create();
-        $comment = Comment::factory()->create([
+        $comment = Comment::factory()->approved()->create([
             'user_id' => $this->user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 2,
         ]);
 
         $this->get(route('publication.show', $publication))

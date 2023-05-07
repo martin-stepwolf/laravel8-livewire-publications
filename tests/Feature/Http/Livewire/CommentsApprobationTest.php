@@ -6,6 +6,9 @@ use App\Http\Livewire\CommentsApprobation;
 use App\Models\Comment;
 use App\Models\Publication;
 use App\Models\User;
+use App\States\Comment\Approved;
+use App\States\Comment\Pending;
+use App\States\Comment\Rejected;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -19,8 +22,6 @@ class CommentsApprobationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
 
         $this->user = User::factory()->create();
 
@@ -47,7 +48,6 @@ class CommentsApprobationTest extends TestCase
         $comment = Comment::factory()->create([
             'user_id' => $user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1,
         ]);
 
         $this->get(route('user.publication.show', ['user' => $this->user->id, 'id' => $publication->id]))
@@ -65,7 +65,6 @@ class CommentsApprobationTest extends TestCase
         $comment = Comment::factory()->create([
             'user_id' => $user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1,
         ]);
 
         Livewire::actingAs($this->user)
@@ -75,7 +74,7 @@ class CommentsApprobationTest extends TestCase
 
         $this->assertDatabaseHas('comments', [
             'content' => $comment->content,
-            'comment_state_id' => 2,
+            'state' => Approved::$name,
         ]);
     }
 
@@ -87,7 +86,6 @@ class CommentsApprobationTest extends TestCase
         $comment = Comment::factory()->create([
             'user_id' => $user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 1,
         ]);
 
         Livewire::actingAs($this->user)
@@ -97,7 +95,7 @@ class CommentsApprobationTest extends TestCase
 
         $this->assertDatabaseHas('comments', [
             'content' => $comment->content,
-            'comment_state_id' => 3,
+            'state' => Rejected::$name,
         ]);
     }
 }

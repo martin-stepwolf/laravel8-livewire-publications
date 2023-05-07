@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Publication;
 use App\Models\User;
+use App\States\Comment\Approved;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,8 +19,6 @@ class CommentsControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
 
         $this->user = User::factory()->create();
 
@@ -46,6 +45,7 @@ class CommentsControllerTest extends TestCase
             'content' => 'A great publication, you know how to make a great one.',
             'user_id' => $this->user->getKey(),
             'publication_id' => $this->publication->getKey(),
+            'state' => Approved::$name,
         ]);
     }
 }

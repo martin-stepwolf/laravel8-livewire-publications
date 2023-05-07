@@ -19,21 +19,18 @@ class CommentTestSeeder extends Seeder
             for ($i = 1; $i <= 1; $i++) {
                 Comment::factory()->create([
                     'publication_id' => $publication->id,
-                    'comment_state_id' => 1,
                 ]);
             }
             // Two comments are approved
             for ($i = 1; $i <= 2; $i++) {
-                Comment::factory()->create([
+                Comment::factory()->approved()->create([
                     'publication_id' => $publication->id,
-                    'comment_state_id' => 2,
                 ]);
             }
             // Three comments are rejected
             for ($i = 1; $i <= 3; $i++) {
-                Comment::factory()->create([
+                Comment::factory()->rejected()->create([
                     'publication_id' => $publication->id,
-                    'comment_state_id' => 3,
                 ]);
             }
         }

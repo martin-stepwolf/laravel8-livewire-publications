@@ -22,9 +22,9 @@
                     <h3 class="font-bold">{{ $publication->id }}.- {{ $publication->title }} </h3>
                     <p class="py-1 text-justify">{{ $publication->excerpt }}</p>
                     <div class="text-sm font-semibold text-indigo-700">
-                        {{$publication->publication_state_id}}
+                        {{$publication->state}}
                         <b>{{ $publication->user->name}} - {{ $publication->created_at->diffForHumans()}}</b> |
-                        Comments: {{ $publication->comments->where('comment_state_id', 2)->count()}}
+                        Comments: {{ $publication->comments()->where('state', 'APPROVED')->count()}}
                     </div>
                     <a href="{{ route('publication.show', $publication) }}" class="text-gray-700 underline">
                         See more

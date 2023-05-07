@@ -23,8 +23,8 @@
                 <td class="border px-4 py-2 text-justify">
                     <b>{{ $publication->title }}</b> <br>
                     {{ $publication->excerpt }}
-                    @if($publication->comments->where('comment_state_id', 1)->count() !=0 )
-                    <br> New comments: {{$publication->comments->where('comment_state_id', 1)->count()}}
+                    @if($publication->comments()->where('state', 'PENDING')->count() !=0 )
+                    <br> New comments: {{$publication->comments()->where('state', 'PENDING')->count()}}
                     @endif
                 </td>
                 <td class="border px-4 py-2">{{ $publication->updated_at->diffForHumans() }}</td>

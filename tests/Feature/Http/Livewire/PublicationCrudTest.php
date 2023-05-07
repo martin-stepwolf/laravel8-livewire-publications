@@ -20,8 +20,6 @@ class PublicationCrudTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed', ['--class' => 'CommentStateSeeder']);
-
         $this->user = User::factory()->create();
 
         $this->actingAs($this->user);
@@ -120,10 +118,9 @@ class PublicationCrudTest extends TestCase
         $publication = Publication::factory()->user($this->user)->create([
             'title' => 'Publication to delete',
         ]);
-        Comment::factory()->create([
+        Comment::factory()->approved()->create([
             'user_id' => $this->user->id,
             'publication_id' => $publication->id,
-            'comment_state_id' => 2,
             'content' => 'Comment to delete also',
         ]);
 

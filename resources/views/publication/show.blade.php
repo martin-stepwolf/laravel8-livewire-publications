@@ -30,7 +30,7 @@
                         @livewire('publication-comments', [
                         'title' => 'Comments',
                         'publication_id' => $publication->id,
-                        'comment_state_id' => 2
+                        'state' => 'APPROVED'
                         ])
                     </div>
                     @if(!$hasCommented)

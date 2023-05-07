@@ -27,14 +27,14 @@
                         @livewire('publication-comments', [
                         'title' => 'Comments approved',
                         'publication_id' => $publication->id,
-                        'comment_state_id' => 2
+                        'state' => 'APPROVED'
                         ])
                     </div>
                     <div class="bg-red-100  mb-2">
                         @livewire('publication-comments', [
                         'title' => 'Comments rejected',
                         'publication_id' => $publication->id,
-                        'comment_state_id' => 3
+                        'state' => 'REJECTED'
                         ])
                     </div>
                     <div>

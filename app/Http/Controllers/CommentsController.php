@@ -6,6 +6,7 @@ use App\Events\NewComment;
 use App\Models\Comment;
 use App\Models\Publication;
 use App\Models\User;
+use App\States\Comment\Approved;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -23,12 +24,11 @@ class CommentsController extends Controller
         /** @var Comment $comment */
         $comment = $authUser->comments()->create($request->all() + [
             'publication_id' => $publication->getKey(),
-            'comment_state_id' => 1,
         ]);
 
         // If the user is the author, the email is not sent and the comment is approved
         if ($publication->user()->is($authUser)) {
-            $comment->update(['comment_state_id' => 2]);
+            $comment->state->transitionTo(Approved::class);
 
             return back()->with('message', 'Your comment was created successfully.');
         }

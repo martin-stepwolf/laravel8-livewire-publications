@@ -14,7 +14,7 @@ class PublicationComments extends Component
 
     public $publication_id;
 
-    public $comment_state_id;
+    public $state;
 
     public function render()
     {
@@ -23,7 +23,7 @@ class PublicationComments extends Component
             'title' => $this->title,
             'comments' => Comment::query()->where([
                 'publication_id' => $this->publication_id,
-                'comment_state_id' => $this->comment_state_id,
+                'state' => $this->state,
             ])->orderBy('created_at', 'desc')->paginate(4),
         ]);
     }
