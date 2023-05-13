@@ -26,7 +26,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.4",
         "nunomaduro/larastan": "1.0",
-        "spatie/laravel-model-states": "^2.4"
+        "spatie/laravel-model-states": "^2.4",
+        "spatie/laravel-view-models": "^1.5"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

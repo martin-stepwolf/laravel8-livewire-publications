@@ -1,7 +1,11 @@
+<?php
+/** @var \App\ViewModels\Publication\ShowPublicationViewModel $vM */
+?>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Publications') }} {{ $publication->id }}
+            {{ __('Publications') }} {{ $vM->publication->getKey() }}
         </h2>
         <div>
             <a href="{{ route('publication.index') }}" class="text-gray-700 underline">
@@ -18,25 +22,27 @@
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <!-- TODO: Create just one template for show and user-show -->
                     <div class="pb-4">
-                        <h3 class="font-bold text-lg">{{ $publication->title }} </h3>
-                        <p class="py-1 text-justify">{{ $publication->content }}</p>
+                        <h3 class="font-bold text-lg">{{ $vM->publication->title }} </h3>
+                        <p class="py-1 text-justify">{{ $vM->publication->content }}</p>
                         <div class="text-sm font-semibold text-indigo-700">
-                            Author: <b>{{ $publication->user->name}}</b> |
-                            Created: <b>{{ $publication->created_at->diffForHumans()}}</b> | Updated: <b>{{ $publication->created_at->diffForHumans()}}</b> <br>
+                            Author: <b>{{ $vM->publication->user->name}}</b> |
+                            Created: <b>{{ $vM->publication->created_at->diffForHumans()}}</b> |
+                            Updated: <b>{{ $vM->publication->updated_at->diffForHumans()}}</b>
+                            <br>
                         </div>
                     </div>
                     <hr>
                     <div class="bg-gray-100 mt-4 mb-2">
                         @livewire('publication-comments', [
                         'title' => 'Comments',
-                        'publication_id' => $publication->id,
+                        'publication_id' => $vM->publication->id,
                         'state' => 'APPROVED'
                         ])
                     </div>
-                    @if(!$hasCommented)
+                    @if(!$vM->userHasCommentedPublication())
                     <div>
                         <h3 class="font-bold text-lg">Add comment</h3>
-                        <form action="{{route('publication.comment.store', $publication->id)}}" method="POST">
+                        <form action="{{route('publication.comment.store', $vM->publication->getKey())}}" method="POST">
                             @csrf
                             <div>
                                 <x-jet-label for="content" value="{{ __('Content') }}" />

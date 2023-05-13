@@ -20,12 +20,13 @@ I decided to challenge me by working with **Jetstream + Livewire - Blade** (inst
 
 ### Achievements 2023 :star2:
 
-- Implemented some design patters: State Pattern
+- Implemented **State Pattern** in comment state
+- Implemented **View Model** in publications
+- Optimized some queries
 
 ### TODOs
 
 - Implement [Alpine.js](https://alpinejs.dev/)
-- Implement [View Models pattern](https://github.com/spatie/laravel-view-models)
 - Improve the quality code
 - Improve the code coverage
 
@@ -123,7 +124,8 @@ You can look the emails with MailHog, it is on the port [8025](http://localhost:
 
 ### Built With 🛠️
 
--   [Laravel Model State](https://spatie.be/docs/laravel-model-states/v2/01-introduction) -  Advanced state support for Laravel models.
+-   [View models in Laravel](https://spatie.be/docs/laravel-model-states/v2/01-introduction)
+-   [Laravel Model State](https://github.com/spatie/laravel-view-models) -  Advanced state support for Laravel models.
 -   [Laravel 8](https://laravel.com/docs/8.x/releases/) - PHP framework.
 -   [Laravel Sail](https://laravel.com/docs/8.x/sail) - Docker development environment.
 -   [Laravel Jetstream - Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) - Starter kit with Authentication, Tailwindcss and more.

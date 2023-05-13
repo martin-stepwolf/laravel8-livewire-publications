@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Publication;
 use App\Models\User;
-use App\States\Comment\Approved;
+use App\ViewModels\Publication\IndexPublicationsViewModel;
+use App\ViewModels\Publication\ShowPublicationViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,21 +13,9 @@ class PublicationsController extends Controller
 {
     public function index(Request $request)
     {
-        $publications = Publication::query()
-            ->where('title', 'LIKE', "%{$request->input('q')}%")
-            ->orWhere('content', 'LIKE', "%{$request->input('q')}%")
-            ->orderBy('created_at', 'desc')
-            ->paginate(8);
+        $vM = new IndexPublicationsViewModel(q: $request->input('q'));
 
-        // If there are some value in the search it is added to the links
-        // publications?q=search&page=3
-        if ($request->input('q') != '') {
-            $publications->appends(['q' => $request->input('q')]);
-        }
-
-        return view('publication/index', compact('publications') + [
-            'q' => $request->input('q'),
-        ]);
+        return view('publication/index', ['vM' => $vM]);
     }
 
     public function show(Publication $publication)
@@ -34,14 +23,12 @@ class PublicationsController extends Controller
         /** @var User $authUser */
         $authUser = Auth::user();
 
-        $hasCommented = false;
+        $publication->load(['user' => function ($q) {
+            $q->select('id', 'name');
+        }]);
 
-        if ($authUser->comments()->where('publication_id', $publication->getKey())->count() !== 0) {
-            $hasCommented = true;
-        }
+        $viewModel = new ShowPublicationViewModel(user: $authUser, publication: $publication);
 
-        return view('publication/show', compact('publication') + compact('hasCommented') + [
-            'comments' => $publication->comments()->where('state', Approved::$name),
-        ]);
+        return view('publication/show', ['vM' => $viewModel]);
     }
 }

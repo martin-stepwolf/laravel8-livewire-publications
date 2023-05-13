@@ -29,7 +29,7 @@
                 </td>
                 <td class="border px-4 py-2">{{ $publication->updated_at->diffForHumans() }}</td>
                 <td class=" border px-4 py-2">
-                    <a href="{{ route('user.publication.show', ['user' => Auth::user()->id, 'id' => $publication->id]) }}" class="text-gray-700 underline">
+                    <a href="{{ route('user.publication.show', ['user' => auth()->id(), 'id' => $publication->id]) }}" class="text-gray-700 underline">
                         See more
                     </a> <br>
                     <x-jet-button class="mb-1" wire:click="edit({{ $publication->id }})">
